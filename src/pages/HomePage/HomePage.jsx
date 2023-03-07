@@ -61,6 +61,9 @@ export function HomePage() {
           Ir a CHAT PAGE
         </Link>
       </button>
+
     </div>
+
+    
   );
 }
