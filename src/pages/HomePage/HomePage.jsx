@@ -6,8 +6,9 @@ import {
   LOGIN_PAGE,
   REGISTER_PAGE,
   PROFILE_PAGE,
-  CHAT_PAGE
+  CHAT_PAGE,
 } from "../../constants/url";
+import { Button } from "../../components/Button/Button";
 
 export function HomePage() {
   const [count, setCount] =
@@ -18,17 +19,16 @@ export function HomePage() {
     console.log(count);
   }, [count]);
 
+  const handleCounter = () => {
+    setCount(count + 1);
+  };
   return (
     <div className={styles.homepage}>
       <h1>HOLA NYAMIGOS</h1>
 
-      <button
-        onClick={() => {
-          setCount(count + 1);
-        }}
-      >
-        CLICKEA
-      </button>
+      <Button onClick={handleCounter} disabled={false} >
+        CLICKEA AQUI
+      </Button>
 
       <h2>CONTADOR DE NYAAS {count}</h2>
 
@@ -49,21 +49,18 @@ export function HomePage() {
           Ir a PROFILE PAGE
         </Link>
       </button>
-      <br/>
+      <br />
       <button>
         <Link to={PAYMENT_PAGE} className={styles.link}>
           Ir a PAYMENT PAGE
         </Link>
       </button>
-      <br/>
+      <br />
       <button>
         <Link to={CHAT_PAGE} className={styles.link}>
           Ir a CHAT PAGE
         </Link>
       </button>
-
     </div>
-
-    
   );
 }

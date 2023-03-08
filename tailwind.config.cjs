@@ -9,6 +9,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       heading: ["Bodoni Moda", "serif"],
+      buttonfont: ['Lato', 'sans-serif'],
     },
   },
   plugins: [],

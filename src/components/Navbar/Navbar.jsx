@@ -7,7 +7,6 @@ export function Navbar() {
   //Cambiar el icono del menu y activar el menu responsive
   const menu = (event) => {
     let list = document.querySelector("ul");
-    console.log(event.currentTarget.className);
     event.currentTarget.className === "menu h-7"
       ? ((event.currentTarget.src = "src/assets/close.png"),
         (event.currentTarget.className = "close h-7"),
