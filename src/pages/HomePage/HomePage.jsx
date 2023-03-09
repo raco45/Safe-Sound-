@@ -6,9 +6,13 @@ import {
   LOGIN_PAGE,
   REGISTER_PAGE,
   PROFILE_PAGE,
-  CHAT_PAGE
+  CHAT_PAGE,
 } from "../../constants/url";
+<<<<<<< HEAD
 import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
+=======
+import { Button } from "../../components/Button/Button";
+>>>>>>> f31854e0e64b3b1b1d8c18c03fc7d5a134fb7502
 
 export function HomePage() {
   const [count, setCount] =
@@ -19,18 +23,17 @@ export function HomePage() {
     console.log(count);
   }, [count]);
 
+  const handleCounter = () => {
+    setCount(count + 1);
+  };
   return (
     <>
     <div className={styles.homepage}>
       <h1>HOLA NYAMIGOS</h1>
 
-      <button
-        onClick={() => {
-          setCount(count + 1);
-        }}
-      >
-        CLICKEA
-      </button>
+      <Button onClick={handleCounter} disabled={false} >
+        CLICKEA AQUI
+      </Button>
 
       <h2>CONTADOR DE NYAAS {count}</h2>
 
@@ -51,13 +54,13 @@ export function HomePage() {
           Ir a PROFILE PAGE
         </Link>
       </button>
-      <br/>
+      <br />
       <button>
         <Link to={PAYMENT_PAGE} className={styles.link}>
           Ir a PAYMENT PAGE
         </Link>
       </button>
-      <br/>
+      <br />
       <button>
         <Link to={CHAT_PAGE} className={styles.link}>
           Ir a CHAT PAGE

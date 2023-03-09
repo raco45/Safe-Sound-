@@ -1,6 +1,7 @@
 import React from 'react'
 
 export function ChatPage() {
+
   return (
     <div>THIS IS CHAT 
     {/* <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
@@ -14,5 +15,6 @@ export function ChatPage() {
     </div> 
     ESTO ESTA BUENISIMO PARA EL COMPONENTE CHAT, ES LA IMAGEN DE CHITCHAT QUE APSE POR EL GRUPO*/}
       PAGE</div>
+   
   )
 }
