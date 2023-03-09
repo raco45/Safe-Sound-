@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./index.module.css";
 import { Link } from "react-router-dom";
 import { CHAT_PAGE, PROFILE_PAGE, HOME_PAGE } from "../../constants/url";
 
