@@ -34,11 +34,11 @@ export function Navbar() {
         <span className="cursor-pointer">
           <Link
             to={HOME_PAGE}
-            className="font-heading text-[#3E0576] font-bold text-2xl pl-2"
+            className="flex pl-2"
             onClick={handlewindow}
           >
-            <img className="h-10 inline mr-2" src="src\assets\logo.png" />
-            Safe&Sound
+            <img className="h-12 inline mr-2" src="src\assets\logo.png" />
+            <h1 className="text-2xl font-heading text-[#3E0576] font-bold pt-1">Safe&Sound</h1>
           </Link>
         </span>
         <span className="cursor-pointer md:hidden block">

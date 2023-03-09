@@ -8,11 +8,8 @@ import {
   PROFILE_PAGE,
   CHAT_PAGE,
 } from "../../constants/url";
-<<<<<<< HEAD
-import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
-=======
 import { Button } from "../../components/Button/Button";
->>>>>>> f31854e0e64b3b1b1d8c18c03fc7d5a134fb7502
+import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
 
 export function HomePage() {
   const [count, setCount] =
@@ -66,6 +63,7 @@ export function HomePage() {
           Ir a CHAT PAGE
         </Link>
       </button>
+
     </div>
     <Miniperfil/>
     </>
