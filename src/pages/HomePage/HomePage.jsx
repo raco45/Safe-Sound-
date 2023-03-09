@@ -8,6 +8,7 @@ import {
   PROFILE_PAGE,
   CHAT_PAGE
 } from "../../constants/url";
+import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
 
 export function HomePage() {
   const [count, setCount] =
@@ -19,6 +20,7 @@ export function HomePage() {
   }, [count]);
 
   return (
+    <>
     <div className={styles.homepage}>
       <h1>HOLA NYAMIGOS</h1>
 
@@ -62,5 +64,7 @@ export function HomePage() {
         </Link>
       </button>
     </div>
+    <Miniperfil/>
+    </>
   );
 }
