@@ -24,6 +24,11 @@ export function HomePage() {
   const handleCounter = () => {
     setCount(count + 1);
   };
+
+  const handleShowMore = () => {
+    
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center items-center">
@@ -47,16 +52,25 @@ export function HomePage() {
           <Miniperfil />
         </div>
         <Button disabled={false}>Mostrar más</Button>
-        <div id='user-comments' className="w-full m-10 flex flex-col justify-center items-center" >
-          <h1 className="font-bold text-xl md:text-3xl">Nuestros usuarios soltaron la sopa</h1>
-          <Comment photo="src\assets\user.png" user_text='lorem aksdjioasdjlasjdolakhdiukasjdknaskndklaskjkdmalkwdknlasmdnjalm' user_name='Emily Rodríguez' />
+        <div
+          id="user-comments"
+          className="w-full m-10 flex flex-col justify-center items-center"
+        >
+          <h1 className="text-[#3E0576] font-bold text-xl md:text-3xl">
+            Nuestros usuarios soltaron la sopa
+          </h1>
+          <Comment
+            photo="src\assets\user.png"
+            user_text="lorem aksdjioasdjlasjdolakhdiukasjdknaskndklaskjkdmalkwdknlasmdnjalm"
+            user_name="Emily Rodríguez"
+          />
         </div>
         <div id="comment-area" className="w-4/5">
-          <h1 className="font-bold text-xl">¡Dejanos un comentario!</h1>
-          <textarea className="md:h-56 h-36 w-80 md:w-1/2 mb-10 mt-6 border-black border-solid border-2"></textarea>
+          <h1 className="font-bold text-xl">¡Déjanos un comentario!</h1>
+          <textarea placeholder="Insertar texto..." className="md:h-56 h-36 w-80 md:w-1/2 mb-10 mt-6 border-black border-solid border-2 p-2"></textarea>
           <Button disabled={false}>Enviar comentario</Button>
         </div>
-        <br/>
+        <br />
       </div>
     </>
   );
