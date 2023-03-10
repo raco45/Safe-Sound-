@@ -1,6 +1,17 @@
 import React from 'react'
+import { signInWithGoogle } from '../../firebase/auth-service';
+// import styles from "./RegisterPage.module.css"
 
 export function RegisterPage() {
+
+  const handleSignWithGoogle = async () => {
+    await signInWithGoogle();
+  };
+
+  const onSubmit = async (event) => {
+
+  }
+
   return (
     <div className='flex'>
       <div className=' flex w-1/3 h-screen bg-[#E1BCE8] justify-center flex-col text-center'>
@@ -13,7 +24,7 @@ export function RegisterPage() {
           <button className=' bg-[#3E0576] rounded-2xl'>Inicia Sesión</button>
         </div>
         <h1 className='text-center'>Registrate para alcanzar el camino a tu bienestar</h1>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className='flex flex-row justify-center'>
           <div className='flex flex-col'>
               <h1>Nombre</h1>
@@ -48,7 +59,10 @@ export function RegisterPage() {
           <div className=' bg-black w-1/3 h-1 rounded-2xl'></div>
           <p>O</p>
           <div className=' bg-black w-1/3 h-1 rounded-2xl'></div>
-          </div>
+          </div> 
+          <button type ='button'  onClick={handleSignWithGoogle}>
+            Registro con Google
+          </button>
       </div>
     </div>
   );
