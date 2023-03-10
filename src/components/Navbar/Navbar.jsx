@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./index.module.css";
 import { Link } from "react-router-dom";
 import { CHAT_PAGE, PROFILE_PAGE, HOME_PAGE } from "../../constants/url";
 
@@ -38,7 +37,7 @@ export function Navbar() {
             onClick={handlewindow}
           >
             <img className="h-12 inline mr-2" src="src\assets\logo.png" />
-            <h1 className="text-2xl font-heading text-[#3E0576] font-bold pt-1">Safe&Sound</h1>
+            <p className="text-2xl font-heading font-[700] text-[#3E0576] pt-1">Safe&Sound</p>
           </Link>
         </span>
         <span className="cursor-pointer md:hidden block">
