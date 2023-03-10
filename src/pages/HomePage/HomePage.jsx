@@ -9,9 +9,11 @@ export function HomePage() {
   const [count, setCount] =
     useState(0); /*estado actual y una función que contiene el estado*/
   const [showMore, setShowMore] = useState(false);
-  const [doctor, setDoctor] = useState(0);
+  
 
   const doctors = [
+    <Miniperfil />,
+    <Miniperfil />,
     <Miniperfil />,
     <Miniperfil />,
     <Miniperfil />,
@@ -28,9 +30,12 @@ export function HomePage() {
     setCount(count + 1);
   };
 
-  //const handleShowMore = () => {
-  //  if (doctors.)
-  //};
+  
+  const handleShowMore = (e) => {
+    setShowMore(!showMore)
+  }
+
+  const numList = showMore || doctors.length < 6 ? doctors.length : 6;
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -46,11 +51,15 @@ export function HomePage() {
 
       <div
         id="doctores"
-        className="grid  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
+        className="grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
       >
-        {doctors.length<6 ? doctors.map((doctor) => { return doctor}) : doctors.slice(0, 6).map((doctor) => {return doctor})}
+        {doctors.slice(0, numList).map((doctor) => {
+          return doctor;
+        })}
       </div>
-      <Button disabled={false}>Mostrar más</Button>
+      <Button onClick={handleShowMore} disabled={false}>
+        {showMore ? "Mostrar menos" : "Mostrar más"}
+      </Button>
       <div
         id="user-comments"
         className="w-full m-10 flex flex-col justify-center items-center"
