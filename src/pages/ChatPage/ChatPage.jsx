@@ -12,6 +12,7 @@ export function ChatPage() {
     <div class="text-xl font-medium text-black">ChitChat</div>
     <p class="text-gray-500">You have a new message!</p>
     </div>
+    Incredible stuff
     </div> 
     ESTO ESTA BUENISIMO PARA EL COMPONENTE CHAT, ES LA IMAGEN DE CHITCHAT QUE APSE POR EL GRUPO*/}
       PAGE</div>
