@@ -8,6 +8,7 @@ import { Comment } from "../../components/Comment/Comment.jsx";
 export function HomePage() {
   const [showMore, setShowMore] = useState(false);
 
+  //Lista de ejemplo para probar los miniperfiles
   const doctors = [
     <Miniperfil />,
     <Miniperfil />,
@@ -23,10 +24,12 @@ export function HomePage() {
     <Miniperfil />,
   ];
 
-  const handleShowMore = (e) => {
+  //activa o desactiva el estado de showMore
+  const handleShowMore = () => {
     setShowMore(!showMore);
   };
 
+  //numero que indica hasta que cantidad se corta la lista
   const numList = showMore || doctors.length < 6 ? doctors.length : 6;
 
   return (
@@ -37,21 +40,29 @@ export function HomePage() {
           className="h-10  md:w-1/2 border-solid border-black border-2 rounded-sm pl-2"
         />
         <select className="border-solid border-black border-2 bg-[#e5c9ea] font-semibold font-maintext">
-          <option value="Nombre" >Nombre</option>
+          <option value="Nombre">Nombre</option>
           <option value="Especialidad">Especialidad</option>
           <option value="Rango precio">Precio</option>
         </select>
-        <img src="src\assets\lupa.png" className="h-10 border-solid border-black border-2 bg-[#b990c0] cursor-pointer rounded-sm"/>
-        
+        <img
+          src="src\assets\lupa.png"
+          className="h-10 border-solid border-black border-2 bg-[#b990c0] cursor-pointer rounded-sm"
+        />
       </div>
 
       <div
         id="doctores"
         className="grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
       >
-        {doctors.slice(0, numList).map((doctor) => {
-          return doctor;
-        })}
+        {doctors.length === 0 ? (
+          <h1 className="text-xl font-maintext font-bold"> 
+            No se han encontrado resultados
+          </h1>
+        ) : (
+          doctors.slice(0, numList).map((doctor) => {
+            return doctor;                              {/* mostrar los miniperfiles que haya disponibles */}
+          })
+        )}
       </div>
       <Button onClick={handleShowMore} disabled={false}>
         {showMore ? "Mostrar menos" : "Mostrar más"}
