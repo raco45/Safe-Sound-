@@ -6,10 +6,7 @@ import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
 import { Comment } from "../../components/Comment/Comment.jsx";
 
 export function HomePage() {
-  const [count, setCount] =
-    useState(0); /*estado actual y una función que contiene el estado*/
   const [showMore, setShowMore] = useState(false);
-  
 
   const doctors = [
     <Miniperfil />,
@@ -26,27 +23,26 @@ export function HomePage() {
     <Miniperfil />,
   ];
 
-  const handleCounter = () => {
-    setCount(count + 1);
-  };
-
-  
   const handleShowMore = (e) => {
-    setShowMore(!showMore)
-  }
+    setShowMore(!showMore);
+  };
 
   const numList = showMore || doctors.length < 6 ? doctors.length : 6;
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className=" w-auto m-5 p-5 border border-solid border-black ">
-        <h1>HOLA NYAMIGOS</h1>
-
-        <Button onClick={handleCounter} disabled={false}>
-          CLICKEA AQUI
-        </Button>
-
-        <p>Cantidad de nyaas {count}</p>
+      <div className="md:w-5/6 mt-10 mb-6 flex">
+        <input
+          placeholder="Escriba aquí..."
+          className="h-10  md:w-1/2 border-solid border-black border-2 rounded-sm pl-2"
+        />
+        <select className="border-solid border-black border-2 bg-[#e5c9ea] font-semibold font-maintext">
+          <option value="Nombre" >Nombre</option>
+          <option value="Especialidad">Especialidad</option>
+          <option value="Rango precio">Precio</option>
+        </select>
+        <img src="src\assets\lupa.png" className="h-10 border-solid border-black border-2 bg-[#b990c0] cursor-pointer rounded-sm"/>
+        
       </div>
 
       <div

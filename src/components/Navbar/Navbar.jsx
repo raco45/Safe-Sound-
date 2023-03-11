@@ -37,7 +37,7 @@ export function Navbar() {
             onClick={handlewindow}
           >
             <img className="h-12 inline mr-2" src="src\assets\logo.png" />
-            <p className="text-2xl font-heading font-[700] text-[#3E0576] pt-1">Safe&Sound</p>
+            <p className="text-2xl font-heading font-extrabold text-[#3E0576] pt-1">Safe&Sound</p>
           </Link>
         </span>
         <span className="cursor-pointer md:hidden block">
