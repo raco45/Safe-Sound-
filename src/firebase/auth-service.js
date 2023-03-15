@@ -1,15 +1,25 @@
 
 //METODOS DE AUTENTIFICACION
 
-import { FacebookAuthProvider, signInWithPopup, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { FacebookAuthProvider, getAdditionalUserInfo, signInWithPopup, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { auth, googleProvider } from "./config"
+import { createUserProfile } from "./users-service";
+
 
 export const signInWithGoogle = async () => {
     try {
-        const result = await signInWithPopup(auth, googleProvider)
-        console.log(result)
+        const result = await signInWithPopup(auth,googleProvider)
+        
+        const {isNewUser}= getAdditionalUserInfo(result);
+        if(isNewUser){
+          await createUserProfile(result.user.uid,{
+            email: result.user.email,
+            username: "",
+            password: "",
+          })
+        }
     } catch (error) {
-        console.error(error);
+      console.error(error)  
     }
 };
 
@@ -21,20 +31,37 @@ export const signInWithGoogle = async () => {
 //     }
 // };
 
-export const registerInWithInfo = async (nombre, apellido, correo, password, telefono) => {
+export const logInWithEmailAndPassword = async(email,password)=>{
     try {
-        await signInWithEmailAndPassword()
+      const result = await signInWithEmailAndPassword(auth,email,password);
+      console.log("Login exitoso",result)
     } catch (error) {
-        
+      console.error(error)  
     }
-};
-
-export const signInWithInfo = async () => {};
-
-export const logout = async () => {
+  };
+  
+  export const registerWithEmailAndPassword = async(
+    username,
+    email,
+    password,
+    )=>{
     try {
-        await signOut(auth)
+      const result = await createUserWithEmailAndPassword(auth,email,password);
+      await createUserProfile(result.user.uid,{
+        username,
+        email,
+        password,
+      })
+      console.log("Registro exitoso",result)
     } catch (error) {
-        console.error({error})
+      console.error(error)  
     }
-};
+  };
+  
+  export const logout = async()=>{
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.log(error)
+    }
+  };

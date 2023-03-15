@@ -85,9 +85,11 @@ export function Navbar() {
         <img className="h-10 inline" src="src\assets\User.png" />
       </span>
       <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
-        <button type="button" onClick={handleLogout} className="font-semibold hover:underline mx-4 my-6 md:my-0"> 
+        <a href={HOME_PAGE}>
+          <button type="button" onClick={handleLogout} className="font-semibold hover:underline mx-4 my-6 md:my-0"> 
           Salir
         </button>
+        </a>
       </li>
       </>
       )}
@@ -95,7 +97,7 @@ export function Navbar() {
       
       {!user && ( <>
         <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
-          <Link to={LOGIN_PAGE} className="text-xl" onClick={handlewindow}>
+          <Link to={LOGIN_PAGE} className="text-xl" onClick={handlewindow} >
             Inicia Sesión
           </Link>
         </li>
