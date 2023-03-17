@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@icon-park/react": "^1.4.2",
     "axios": "^1.3.4",
     "firebase": "^9.17.2",
     "react": "^18.2.0",
