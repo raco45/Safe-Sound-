@@ -41,16 +41,20 @@ export const logInWithEmailAndPassword = async(email,password)=>{
   };
   
   export const registerWithEmailAndPassword = async(
-    username,
+    name,
+    lastname,
     email,
-    password,
+    phone,
+    password
     )=>{
     try {
       const result = await createUserWithEmailAndPassword(auth,email,password);
       await createUserProfile(result.user.uid,{
-        username,
+        name,
+        lastname,
         email,
-        password,
+        phone,
+        password
       })
       console.log("Registro exitoso",result)
     } catch (error) {
