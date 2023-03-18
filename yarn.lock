@@ -1358,6 +1358,11 @@ normalize-range@^0.1.2:
   resolved "https://registry.npmjs.org/normalize-range/-/normalize-range-0.1.2.tgz"
   integrity sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==
 
+object-assign@^2.0.0:
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/object-assign/-/object-assign-2.1.1.tgz"
+  integrity sha512-CdsOUYIh5wIiozhJ3rLQgmUTgcyzFwZZrqhkKhODMoGtPKM+wt0h0CNIoauJWMsS9822EdzPsF/6mb4nLvPN5g==
+
 object-hash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/object-hash/-/object-hash-3.0.0.tgz"
@@ -1496,6 +1501,14 @@ react-dom@^18.2.0, react-dom@>=16.8, react-dom@>=16.9:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-mixin@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/react-mixin/-/react-mixin-2.0.2.tgz"
+  integrity sha512-0d9v7ZbM6v2SRabr6pXwYIi0w6gObWN+rMDcppSkqUiDMPEHiwU2L6J1DLrr4KIKIe9sW02B8aUHcca5S+Dk2Q==
+  dependencies:
+    object-assign "^2.0.0"
+    smart-mixin "^1.2.0"
+
 react-refresh@^0.14.0:
   version "0.14.0"
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.0.tgz"
@@ -1586,6 +1599,11 @@ semver@^6.3.0:
   version "6.3.0"
   resolved "https://registry.npmjs.org/semver/-/semver-6.3.0.tgz"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
+
+smart-mixin@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/smart-mixin/-/smart-mixin-1.2.1.tgz"
+  integrity sha512-PMHIQCtRq7h6pZAw0p8o8WuUyiK+sxsso4Czrh+zLdoEvuep+iRfQ4fL0PWI7Lq8K2ZfwgswvZ39hV8uJZ2qiw==
 
 source-map-js@^1.0.2:
   version "1.0.2"

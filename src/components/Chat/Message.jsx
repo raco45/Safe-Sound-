@@ -4,6 +4,17 @@ import user from "../../assets/user.png";
 
 export default function Message() {
   return (
+    <>
+    <div className={styles.messageOwner}>
+       <div className={styles.messageInfo}>
+        <img src={user} alt=''/>
+        <span>Just now</span>
+       </div>
+       <div className={styles.messageContent}>
+        <p>Hello</p>
+        <img src="" alt=""/>
+       </div>
+    </div>
     <div className={styles.message}>
        <div className={styles.messageInfo}>
         <img src={user} alt=''/>
@@ -13,9 +24,10 @@ export default function Message() {
         <p>Hello</p>
         <img src="" alt=""/>
        </div>
+    </div>
        
       
-    </div>
       
+    </>
   )
 }
