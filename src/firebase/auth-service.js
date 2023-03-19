@@ -12,10 +12,14 @@ export const signInWithGoogle = async () => {
         
         const {isNewUser}= getAdditionalUserInfo(result);
         if(isNewUser){
+        let cadena = result.user.displayName.split(" ");
           await createUserProfile(result.user.uid,{
+            name: cadena[0],
+            lastname: cadena[1],
             email: result.user.email,
-            username: "",
+            phone: result.user.phoneNumber,
             password: "",
+            
           })
         }
     } catch (error) {
@@ -54,7 +58,7 @@ export const logInWithEmailAndPassword = async(email,password)=>{
         lastname,
         email,
         phone,
-        password
+        password,
       })
       console.log("Registro exitoso",result)
     } catch (error) {
