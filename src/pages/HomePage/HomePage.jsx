@@ -6,12 +6,12 @@ import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
 import { Comment } from "../../components/Comment/Comment.jsx";
 
 export function HomePage() {
-  const [count, setCount] =
-    useState(0); /*estado actual y una función que contiene el estado*/
   const [showMore, setShowMore] = useState(false);
-  const [doctor, setDoctor] = useState(0);
 
+  //Lista de ejemplo para probar los miniperfiles
   const doctors = [
+    <Miniperfil />,
+    <Miniperfil />,
     <Miniperfil />,
     <Miniperfil />,
     <Miniperfil />,
@@ -24,33 +24,49 @@ export function HomePage() {
     <Miniperfil />,
   ];
 
-  const handleCounter = () => {
-    setCount(count + 1);
+  //activa o desactiva el estado de showMore
+  const handleShowMore = () => {
+    setShowMore(!showMore);
   };
 
-  //const handleShowMore = () => {
-  //  if (doctors.)
-  //};
+  //numero que indica hasta que cantidad se corta la lista
+  const numList = showMore || doctors.length < 6 ? doctors.length : 6;
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className=" w-auto m-5 p-5 border border-solid border-black ">
-        <h1>HOLA NYAMIGOS</h1>
-
-        <Button onClick={handleCounter} disabled={false}>
-          CLICKEA AQUI
-        </Button>
-
-        <p>Cantidad de nyaas {count}</p>
+    <div className="flex flex-col justify-center items-center bg-[#FBE8FE]">
+      <div className="md:w-5/6 mt-10 mb-6 flex">
+        <input
+          placeholder="Escriba aquí..."
+          className="h-10  md:w-1/2 border-solid border-black border-2 rounded-sm pl-2"
+        />
+        <select className="border-solid border-black border-2 bg-[#e5c9ea] font-semibold font-maintext">
+          <option value="Nombre">Nombre</option>
+          <option value="Especialidad">Especialidad</option>
+          <option value="Rango precio">Precio</option>
+        </select>
+        <img
+          src="src\assets\lupa.png"
+          className="h-10 w-auto border-solid border-black border-2 bg-[#b990c0] cursor-pointer rounded-sm"
+        />
       </div>
 
       <div
         id="doctores"
-        className="grid  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
+        className="grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
       >
-        {doctors.length<6 ? doctors.map((doctor) => { return doctor}) : doctors.slice(0, 6).map((doctor) => {return doctor})}
+        {doctors.length === 0 ? (
+          <h1 className="text-xl font-maintext font-bold"> 
+            No se han encontrado resultados
+          </h1>
+        ) : (
+          doctors.slice(0, numList).map((doctor) => {
+            return doctor;                              {/* mostrar los miniperfiles que haya disponibles */}
+          })
+        )}
       </div>
-      <Button disabled={false}>Mostrar más</Button>
+      <Button onClick={handleShowMore} disabled={false}>
+        {showMore ? "Mostrar menos" : "Mostrar más"}
+      </Button>
       <div
         id="user-comments"
         className="w-full m-10 flex flex-col justify-center items-center"
@@ -74,6 +90,6 @@ export function HomePage() {
       </div>
       <br />
     </div>
- 
+  
   );
 }

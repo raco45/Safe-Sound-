@@ -1,7 +1,5 @@
 /*titulo*/
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600&display=swap');
-/*maintext*/
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap'); 
 
 @tailwind base;
 @tailwind components;
