@@ -1,8 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CHAT_PAGE, PROFILE_PAGE, HOME_PAGE } from "../../constants/url";
+import { CHAT_PAGE, PROFILE_PAGE, HOME_PAGE, LOGIN_PAGE, REGISTER_PAGE } from "../../constants/url";
+import { useUser } from "../../Contexts/UserContext";
+import { logout } from "../../firebase/auth-service";
 
 export function Navbar() {
+  const {user} = useUser();
+
+  const handleLogout = async () => {
+    console.log("Saliendo...")
+    await logout()
+  }
+
   //Cambiar el icono del menu y activar el menu responsive
   const menu = (event) => {
     let list = document.querySelector("ul");
@@ -54,22 +63,47 @@ export function Navbar() {
         className="text-white md:flex md:items-center md:z-auto md:static absolute
        bg-[#B990C0] w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl7
        md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-400"
-      >
-        <li className=" font-semibold hover:text-[#3E0576] mx-4  my-6 md:my-0 ">
-          <Link className="text-xl">Buscar</Link>
-        </li>
-
-        <li className="font-semibold hover:text-[#3E0576] mx-4 my-6 md:my-0">
-          <Link to={CHAT_PAGE} className="text-xl" onClick={handlewindow}>
-            Chat
+      > 
+      {!!user &&(<>
+      <li className="font-semibold hover:underline mx-4  my-6 md:my-0 ">
+        <Link className="text-xl">Buscar</Link>
+      </li>
+      <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
+        <Link to={CHAT_PAGE} className="text-xl" onClick={handlewindow}>
+          Chat
+        </Link>
+      </li>
+      <span className="font-semibold mx-4 text-xl flex items-center cursor-pointer hover:underline">
+        <Link to={PROFILE_PAGE} className="pr-2" onClick={handlewindow}>
+          Bienvenido, {user.name}
+        </Link>
+        <img className="h-10 inline" src="src\assets\User.png" />
+      </span>
+      <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
+        <a href={HOME_PAGE}>
+          <button type="button" onClick={handleLogout} className="font-semibold hover:underline mx-4 my-6 md:my-0"> 
+          Salir
+        </button>
+        </a>
+      </li>
+      </>
+      )}
+      
+      
+      {!user && ( <>
+        <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
+          <Link to={LOGIN_PAGE} className="text-xl" onClick={handlewindow} >
+            Inicia Sesión
           </Link>
         </li>
-        <span className="hover:text-[#3E0576] font-semibold mx-4 text-xl flex items-center cursor-pointer">
-          <Link to={PROFILE_PAGE} className="pr-2" onClick={handlewindow}>
-            Nombre Usuario
+        <span className="font-semibold mx-4 text-xl flex items-center cursor-pointer hover:underline">
+          <Link to={REGISTER_PAGE} className="pr-2" onClick={handlewindow}>
+            Registrarse
           </Link>
           <img className="h-10 inline" src="src\assets\User.png" />
         </span>
+        </>
+        )}
       </ul>
     </nav>
   );

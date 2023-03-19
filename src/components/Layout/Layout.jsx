@@ -2,10 +2,13 @@ import React from "react";
 import { Navbar } from "../Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import style from './index.module.css'
+import { UserContextProvider } from "../../Contexts/UserContext";
 
-export function Layout() {
+
+export default function Layout() {
   return (
     <main>
+    <UserContextProvider>
     <Navbar />
 
       <section>
@@ -14,6 +17,7 @@ export function Layout() {
       {/* <footer>
             Holi
         </footer> */}
+    </UserContextProvider>
     </main>
   );
 }
