@@ -3,10 +3,11 @@ import { Navbar } from "../Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import { UserContextProvider } from "../../Contexts/UserContext";
 
+
 export default function Layout() {
   return (
     <main>
-      <UserContextProvider>
+    <UserContextProvider>
     <Navbar />
 
       <section>
@@ -15,7 +16,7 @@ export default function Layout() {
       {/* <footer>
             Holi
         </footer> */}
-      </UserContextProvider>
+    </UserContextProvider>
     </main>
   );
 }

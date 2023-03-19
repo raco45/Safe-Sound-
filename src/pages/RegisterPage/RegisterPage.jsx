@@ -16,10 +16,16 @@ export function RegisterPage() {
 } = useForm({});
 
 const onSubmit = async(data) => {
-    console.log(data)
-    data.preventDefault();
-    await registerWithEmailAndPassword(data.name, data.lastname, data.email, data.phone, data.password);
-    navigate(MOVIES_URL)
+    try {
+        await registerWithEmailAndPassword(data.name, data.lastname, data.email, data.phone, data.password);
+        navigate(PROFILE_PAGE)
+    } catch (error) {
+        setError()
+    }
+}
+
+const onError = () => {
+    console.log("error")
 }
 
   const handleSigninWithGoogle = async ()=>{
@@ -42,7 +48,7 @@ const onSubmit = async(data) => {
 
                 <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-lg sm:rounded-lg">
                 <h1 className='text-center'>Registrate para alcanzar el camino a tu bienestar</h1>
-                    <form onSubmit={handleSubmit()}>
+                    <form onSubmit={handleSubmit(onSubmit, onError)}>
                         
                         <div className="mt-4">
                             <label
@@ -137,7 +143,7 @@ const onSubmit = async(data) => {
                                 <input
                                     {...register("password", 
                                     { required: 'Contraseña es obligatoria', 
-                                    maxLength: 20 })}
+                                    minLength: 6 })}
                                     type="password"
                                     name="password"
                                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -159,7 +165,8 @@ const onSubmit = async(data) => {
                     </div>
 
                         <div className="flex items-center mt-4">
-                            <button onClick={onSubmit} className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3E0576] rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                            {/* Sumamente pendiente con este onclick, se estaba confudiendo con la funcion */}
+                            <button onClick={onsubmit} className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3E0576] rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
                                 Registrarse
                             </button>
                         </div>

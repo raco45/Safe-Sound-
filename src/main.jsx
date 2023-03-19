@@ -11,6 +11,8 @@ import { ChatPage } from "./pages/ChatPage/ChatPage";
 import { DoctorProfilePage } from "./pages/DoctorProfilePage/DoctorProfilePage";
 import Layout from "./components/Layout/Layout";
 import {PrivateRoute} from './components/PrivateRoutes/PrivateRoute'
+import { UserContextProvider } from '../src/Contexts/UserContext'
+
 import {
   HOME_PAGE,
   LOGIN_PAGE,
