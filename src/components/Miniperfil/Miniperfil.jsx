@@ -6,7 +6,7 @@ import styles from "./index.module.css";
 export function Miniperfil() {
   return (
     <div>
-      <div class="p-4 w-80 container mx-auto bg-[#b990c0] rounded-xl shadow-md mb-5">
+      <div className="p-4 w-80 container mx-auto bg-[#b990c0] rounded-xl shadow-md mb-5">
         <div className='inline-grid grid-cols-3 gap-x-4'>
           <div className="col-span-2 p-2 fonttext-xl font-medium text-black font-maintext font-bold">Nombre del Usuario</div>
 
