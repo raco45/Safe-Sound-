@@ -33,7 +33,7 @@ export function HomePage() {
   const numList = showMore || doctors.length < 6 ? doctors.length : 6;
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center bg-[#FBE8FE]">
       <div className="md:w-5/6 mt-10 mb-6 flex">
         <input
           placeholder="Escriba aquí..."
@@ -46,7 +46,7 @@ export function HomePage() {
         </select>
         <img
           src="src\assets\lupa.png"
-          className="h-10 border-solid border-black border-2 bg-[#b990c0] cursor-pointer rounded-sm"
+          className="h-10 w-auto border-solid border-black border-2 bg-[#b990c0] cursor-pointer rounded-sm"
         />
       </div>
 
@@ -90,5 +90,6 @@ export function HomePage() {
       </div>
       <br />
     </div>
+  
   );
 }
