@@ -19,6 +19,7 @@ export const signInWithGoogle = async () => {
             email: result.user.email,
             phone: result.user.phoneNumber,
             password: "",
+            profilePic: result.user.photoURL,
             
           })
         }
@@ -59,6 +60,7 @@ export const logInWithEmailAndPassword = async(email,password)=>{
         email,
         phone,
         password,
+        profilePic: null,
       })
       console.log("Registro exitoso",result)
     } catch (error) {
