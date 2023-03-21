@@ -21,8 +21,12 @@ import {
   PAYMENT_PAGE,
   CHAT_PAGE,
 } from "./constants/url";
+import { ChatContextProvider } from "./Contexts/ChatContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+  <UserContextProvider>
+
+  <ChatContextProvider>
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
@@ -40,4 +44,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
+  </ChatContextProvider>
+  </UserContextProvider>
 );

@@ -1,10 +1,10 @@
 
 //METODOS DE AUTENTIFICACION
-
+import{collection, doc,setDoc, where,query,getDocs} from "firebase/firestore"
 import { FacebookAuthProvider, getAdditionalUserInfo, signInWithPopup, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { auth, googleProvider } from "./config"
 import { createUserProfile } from "./users-service";
-
+import{db} from "./config"
 
 export const signInWithGoogle = async () => {
     try {
@@ -14,6 +14,7 @@ export const signInWithGoogle = async () => {
         if(isNewUser){
         let cadena = result.user.displayName.split(" ");
           await createUserProfile(result.user.uid,{
+            id: result.user.uid,
             name: cadena[0],
             lastname: cadena[1],
             email: result.user.email,
@@ -22,6 +23,8 @@ export const signInWithGoogle = async () => {
             profilePic: result.user.photoURL,
             
           })
+
+          
         }
     } catch (error) {
       console.error(error)  
@@ -55,6 +58,7 @@ export const logInWithEmailAndPassword = async(email,password)=>{
     try {
       const result = await createUserWithEmailAndPassword(auth,email,password);
       await createUserProfile(result.user.uid,{
+        id: result.user.uid,
         name,
         lastname,
         email,
