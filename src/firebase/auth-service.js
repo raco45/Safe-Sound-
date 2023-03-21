@@ -21,9 +21,11 @@ export const signInWithGoogle = async () => {
       await createUserProfile(result.user.uid, {
         name: cadena[0],
         lastname: cadena[1],
-        email: result.user.email,
+        email: result.user.email, //TODO añadir los campos siguientes que puede tener el usuario
         phone: result.user.phoneNumber,
         password: "",
+        description: "",
+        country: "",
       });
     }
   } catch (error) {
@@ -41,7 +43,7 @@ export const signInWithGoogle = async () => {
 
 export const logInWithEmailAndPassword = async (email, password) => {
   try {
-    console.log(email, password)
+    console.log(email, password);
     const result = await signInWithEmailAndPassword(auth, email, password);
     console.log("Login exitoso", result);
   } catch (error) {
@@ -54,7 +56,9 @@ export const registerWithEmailAndPassword = async (
   lastname,
   email,
   phone,
-  password
+  password,
+  description = "",
+  country = ""
 ) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -64,6 +68,8 @@ export const registerWithEmailAndPassword = async (
       email,
       phone,
       password,
+      description,
+      country,
     });
     console.log("Registro exitoso", result);
   } catch (error) {
