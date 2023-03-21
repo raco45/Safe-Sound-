@@ -6,7 +6,7 @@ import styles from "./index.module.css";
 export function Miniperfil() {
   return (
     <div>
-      <div class="p-4 w-80 container mx-auto bg-[#b990c0] rounded-xl shadow-md mb-5 h-auto">
+      <div className="p-4 w-80 container mx-auto bg-[#b990c0] rounded-xl shadow-md mb-5 h-auto">
         <div className='inline-grid grid-cols-3 gap-x-4'>
           <div className="col-span-2 p-2 fonttext-xl text-black font-maintext font-bold">Nombre del Usuario</div>
           <img className="w-10 h-auto" src="src\assets\user.png" alt="" /> {/*$:doctor.precio = bajo, y asi o por id*/}
