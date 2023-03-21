@@ -11,12 +11,12 @@ export function UserProfilePage() {
         <img src="src\assets\user.png" className="md:h-56 w-auto mb-6" />
         <div>
           <p className="text-[#3E0576] font-semibold m-2">Sobre mí :</p>
-          {user.description === "" && (
+          {!user.description && (
             <p className="border-2 border-black border-solid rounded-md p-2 bg-white">
               No hay descripción disponible
             </p>
           )}
-          {user.description != "" && (
+          {user.description && (
             <p className="border-2 border-black border-solid rounded-md p-2 bg-white">
               {user.description}
             </p>
