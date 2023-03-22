@@ -75,7 +75,7 @@ export function Navbar() {
         <Link to={PROFILE_PAGE} className="pr-2" onClick={handlewindow}>
           {user.name}
         </Link>
-        <img className="h-10 w-auto inline" src="src\assets\User.png" />
+        <img className="h-10 w-auto inline" src="src\assets\user.png" />
       </span>
       <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
         <Link to={HOME_PAGE}>

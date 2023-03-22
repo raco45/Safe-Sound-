@@ -24,8 +24,6 @@ export const signInWithGoogle = async () => {
         email: result.user.email, //TODO añadir los campos siguientes que puede tener el usuario
         phone: result.user.phoneNumber,
         password: "",
-        description: "",
-        country: "",
       });
     }
   } catch (error) {
@@ -57,8 +55,6 @@ export const registerWithEmailAndPassword = async (
   email,
   phone,
   password,
-  description = "",
-  country = ""
 ) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -68,8 +64,6 @@ export const registerWithEmailAndPassword = async (
       email,
       phone,
       password,
-      description,
-      country,
     });
     console.log("Registro exitoso", result);
   } catch (error) {

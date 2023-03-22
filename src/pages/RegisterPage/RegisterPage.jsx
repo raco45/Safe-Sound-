@@ -28,7 +28,7 @@ export function RegisterPage() {
       );
       navigate(PROFILE_PAGE);
     } catch (error) {
-      setError();
+      console.log(error)
     }
   };
 
@@ -47,7 +47,7 @@ export function RegisterPage() {
       <div className=" flex w-1/3 h-screen bg-[#E1BCE8] justify-center flex-col text-center">
         <h1 className="font-bold">Safe&Sound</h1>
         <p>
-          Encuentra a los mejores especialistas que te brindaran terapias
+          Encuentra a los mejores especialistas que te brindarán terapias
           psicologicas .{" "}
         </p>
       </div>
