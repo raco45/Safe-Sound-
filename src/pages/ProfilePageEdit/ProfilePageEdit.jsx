@@ -15,16 +15,9 @@ export function ProfilePageEdit() {
     formState: { errors },
   } = useForm({});
 
-  //TODO ARREGLARLO PORQUE TODO DA UNDEFINED
+  
   const onSubmit = async (data) => {
     try {
-      console.log("ENTRO");
-      console.log("ENTRO NAME " + data.name);
-      console.log("ENTRO LASTNAME " + data.lastname);
-      console.log("ENTRO PHONE " + data.phone);
-      console.log("ENTRO DESCRIPTION " + data.description);
-      console.log("ENTRO country " + data.country);
-
       await updateUserProfile(user.id, {
         ...data,
         name: data.name,
@@ -64,7 +57,9 @@ export function ProfilePageEdit() {
                   <div className="flex flex-col items-start">
                     <input
                       defaultValue={user.name}
-                      {...register("name")}
+                      {...register("name",{
+                        required: "Nombre es obligatorio",
+                      })}
                       type="name"
                       name="name"
                       placeholder={user.name}
@@ -84,7 +79,9 @@ export function ProfilePageEdit() {
                   <div className="flex flex-col items-start">
                     <input
                       defaultValue={user.lastname ? user.lastname : ""}
-                      {...register("lastname")}
+                      {...register("lastname",{
+                        required: "Apellido es obligatorio",
+                      })}
                       type="text"
                       name="lastname"
                       placeholder={user.lastname}
