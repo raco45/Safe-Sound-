@@ -18,7 +18,7 @@ export function ProfilePageEdit() {
   
   const onSubmit = async (data) => {
     try {
-      await updateUserProfile(user.id, {
+      await updateUserProfile(user.id, { //actualizar datos en firebase/firestore
         ...data,
         name: data.name,
         lastname: data.lastname,
@@ -29,7 +29,7 @@ export function ProfilePageEdit() {
       setUser({
         ...user,
         name: data.name,
-        lastname: data.lastname,
+        lastname: data.lastname,   //actualizar datos del user para actualizar la UI
         phone: data.phone,
         country: data.country,
         description: data.description,
