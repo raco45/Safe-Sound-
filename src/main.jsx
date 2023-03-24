@@ -9,6 +9,7 @@ import { UserProfilePage } from "./pages/UserProfilePage/UserProfilePage";
 import { PaymentPage } from "./pages/PaymentPage/PaymentPage";
 import { ChatPage } from "./pages/ChatPage/ChatPage";
 import { DoctorProfilePage } from "./pages/DoctorProfilePage/DoctorProfilePage";
+import { DoctorCredentials } from "./pages/RegisterPage/DoctorCredentials";
 import Layout from "./components/Layout/Layout";
 import {PrivateRoute} from './components/PrivateRoutes/PrivateRoute'
 import { UserContextProvider } from '../src/Contexts/UserContext'
@@ -20,6 +21,7 @@ import {
   PROFILE_PAGE,
   PAYMENT_PAGE,
   CHAT_PAGE,
+  DOCTOR_CREDENTIALS
 } from "./constants/url";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -29,6 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route element={<Layout />}>
           <Route path={HOME_PAGE} element={<HomePage />} />
           <Route path={LOGIN_PAGE} element={<LoginPage />} />
+          <Route path={DOCTOR_CREDENTIALS} element={<DoctorCredentials />} />
           <Route path={REGISTER_PAGE} element={<RegisterPage />} />
           <Route path={PROFILE_PAGE} element={ <PrivateRoute><UserProfilePage /></PrivateRoute>} />
           <Route path={PAYMENT_PAGE} element={<PrivateRoute><PaymentPage/></PrivateRoute>} />
