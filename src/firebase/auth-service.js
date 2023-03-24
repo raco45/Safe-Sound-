@@ -47,7 +47,9 @@ export const logInWithEmailAndPassword = async (email, password) => {
     const result = await signInWithEmailAndPassword(auth, email, password);
     console.log("Login exitoso", result);
   } catch (error) {
-    console.error(error);
+    if (email != null && password != null) {
+      alert("Contraseña o correo inválido")
+    }
   }
 };
 
