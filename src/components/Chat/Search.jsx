@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styles from "../../pages/ChatPage/ChatPage.module.css";
-import userPic from "../../assets/user.png";
+
 import {db} from "../../firebase/config";
 import { collection, where, query, getDoc,getDocs, QuerySnapshot, setDoc, updateDoc, serverTimestamp, doc } from '@firebase/firestore';
 import { UserContext, useUser } from '../../Contexts/UserContext';
@@ -53,7 +53,7 @@ export default function Search() {
                     [combinedId+".userInfo"]:{
                         id: currentUser.id,
                         displayName: currentUser.name,
-                        photoUrl: userPic,
+                        photoUrl: currentUser.photoUrl,
                     },
                     [combinedId+".date"]: serverTimestamp()
                 });
@@ -62,7 +62,7 @@ export default function Search() {
                     [combinedId+".userInfo"]:{
                         id: user.id,
                         displayName: user.name,
-                        photoUrl: userPic,
+                        photoUrl: user.photoUrl,
                     },
                     [combinedId+".date"]: serverTimestamp()
                 });
@@ -87,7 +87,7 @@ export default function Search() {
         </div>
         {err && <span> User not found  </span>}
         {currentUser && <div className={styles.userChat} onClick={handleSelect}>
-            <img src={userPic} alt=""/>
+            <img src={currentUser.photoUrl} alt=""/>
             <div className={styles.userChatInfo}>
                 <span> {currentUser.name} </span>
             </div>

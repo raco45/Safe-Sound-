@@ -12,7 +12,7 @@ export function UserContextProvider({children}){
     useEffect(() => {
         onAuthStateChanged(auth, async (firebaseUser) => {
             setIsLoading(true)
-            console.log("Prueba");
+            
             console.log(firebaseUser);
             //Aqui se agregan los otros atributos (rol, documentos, etc)
             if (firebaseUser){
@@ -27,7 +27,8 @@ export function UserContextProvider({children}){
 
     return  <UserContext.Provider value= {{
             user, 
-                isLoading,
+            isLoading,
+            setUser,
         }}> {children} 
         </UserContext.Provider>
     
