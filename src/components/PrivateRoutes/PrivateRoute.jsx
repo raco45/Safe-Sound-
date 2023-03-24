@@ -3,7 +3,7 @@ import { LOGIN_PAGE } from "../../constants/url";
 import { useUser } from "../../Contexts/UserContext";
 
 export function PrivateRoute({children}){
-    console.log("Imprimiendo useuser", useUser());
+    
     const {user, isLoading}=useUser()
 
     if(isLoading){

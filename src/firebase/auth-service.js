@@ -1,5 +1,5 @@
 //METODOS DE AUTENTIFICACION
-
+import userPic from "../assets/user.png";
 import {
   FacebookAuthProvider,
   getAdditionalUserInfo,
@@ -19,10 +19,12 @@ export const signInWithGoogle = async (useRol) => {
     if (isNewUser) {
       let cadena = result.user.displayName.split(" ");
       await createUserProfile(result.user.uid, {
+        id:result.user.uid,
         name: cadena[0],
         lastname: cadena[1],
         email: result.user.email, //TODO añadir los campos siguientes que puede tener el usuario
         phone: result.user.phoneNumber,
+        photoUrl: result.user.photoURL,
         password: "",
         role: useRol,
         description: "",
@@ -48,7 +50,9 @@ export const logInWithEmailAndPassword = async (email, password) => {
     const result = await signInWithEmailAndPassword(auth, email, password);
     console.log("Login exitoso", result);
   } catch (error) {
-    console.error(error);
+    if (email != null && password != null) {
+      alert("Contraseña o correo inválido")
+    }
   }
 };
 
@@ -65,10 +69,12 @@ export const registerWithEmailAndPassword = async (
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     await createUserProfile(result.user.uid, {
+      id: result.user.uid,
       name,
       lastname,
       email,
       phone,
+      photoUrl: userPic,
       password,
       role,
       description,

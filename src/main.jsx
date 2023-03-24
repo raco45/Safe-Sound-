@@ -21,10 +21,16 @@ import {
   PROFILE_PAGE,
   PAYMENT_PAGE,
   CHAT_PAGE,
-  DOCTOR_CREDENTIALS
+  DOCTOR_CREDENTIALS,
+  PROFILE_PAGE_EDIT,
 } from "./constants/url";
+import { ChatContextProvider } from "./Contexts/ChatContext";
+import { ProfilePageEdit } from "./pages/ProfilePageEdit/ProfilePageEdit";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+  <UserContextProvider>
+
+  <ChatContextProvider>
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
@@ -34,6 +40,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path={DOCTOR_CREDENTIALS} element={<DoctorCredentials />} />
           <Route path={REGISTER_PAGE} element={<RegisterPage />} />
           <Route path={PROFILE_PAGE} element={ <PrivateRoute><UserProfilePage /></PrivateRoute>} />
+          <Route path={PROFILE_PAGE_EDIT} element={<PrivateRoute><ProfilePageEdit /></PrivateRoute>} />
           <Route path={PAYMENT_PAGE} element={<PrivateRoute><PaymentPage/></PrivateRoute>} />
           <Route path={CHAT_PAGE} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
           <Route path="/doctors/:doctorId" element={<PrivateRoute><DoctorProfilePage /></PrivateRoute>} />
@@ -43,4 +50,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
+  </ChatContextProvider>
+  </UserContextProvider>
 );
