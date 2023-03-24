@@ -1,5 +1,5 @@
 //METODOS DE AUTENTIFICACION
-
+import userPic from "../assets/user.png";
 import {
   FacebookAuthProvider,
   getAdditionalUserInfo,
@@ -66,7 +66,7 @@ export const registerWithEmailAndPassword = async (
       lastname,
       email,
       phone,
-      profilePic: null,
+      photoUrl: userPic,
       password,
     });
     console.log("Registro exitoso", result);
