@@ -26,7 +26,8 @@ export function RegisterPage() {
         data.lastname,
         data.email,
         data.phone,
-        data.password
+        data.password,
+        useRol,
       );
       navigate(PROFILE_PAGE);
     } catch (error) {
@@ -39,24 +40,10 @@ export function RegisterPage() {
   };
 
   const handleSigninWithGoogle = async () => {
-    await signInWithGoogle();
+    await signInWithGoogle(useRol);
     /* Poner condicion de que si cancela no se redirija*/
     navigate(PROFILE_PAGE);
   };
-
-//   const select = document.getElementById("roles");
-//   const button = document.getElementById("registro");
-
-//   select.addEventListener("change", function() {
-//     const selectedValue = select.value;
-  
-//   if (selectedValue === "none") {
-//     button.disabled = true;
-//   } else {
-//     button.disabled = false;
-//   }
-// });
-
 
   return (
     <div className="flex">
@@ -84,8 +71,8 @@ export function RegisterPage() {
                       onChange={e => setRol(e.target.value)}
                     >
                         <option value="none">Elegir</option>
-                        <option value={"doctor"}>Doctor</option>
-                        <option value={"paciente"}>Paciente</option>
+                        <option value={"Doctor"}>Doctor</option>
+                        <option value={"Paciente"}>Paciente</option>
                     </select>
               </div>
 
@@ -214,7 +201,7 @@ export function RegisterPage() {
                 <div className="flex items-center mt-4">
                   {/* Sumamente pendiente con este onclick, se estaba confudiendo con la funcion */}
                   <button
-                    id="registro"
+                    disabled={useRol.match("none")}
                     onClick={onsubmit}
                     className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3E0576] rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
                   >

@@ -11,7 +11,7 @@ import {
 import { auth, googleProvider } from "./config";
 import { createUserProfile } from "./users-service";
 
-export const signInWithGoogle = async () => {
+export const signInWithGoogle = async (useRol) => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
 
@@ -24,6 +24,7 @@ export const signInWithGoogle = async () => {
         email: result.user.email, //TODO añadir los campos siguientes que puede tener el usuario
         phone: result.user.phoneNumber,
         password: "",
+        role: useRol,
         description: "",
         country: "",
       });
@@ -57,6 +58,7 @@ export const registerWithEmailAndPassword = async (
   email,
   phone,
   password,
+  role,
   description = "",
   country = ""
 ) => {
@@ -68,6 +70,7 @@ export const registerWithEmailAndPassword = async (
       email,
       phone,
       password,
+      role,
       description,
       country,
     });
