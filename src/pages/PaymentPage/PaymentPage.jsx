@@ -4,7 +4,6 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 export function PaymentPage() {
   return (
     <div className="flex">
-      <h1>Información del pago</h1>
       <div className=" flex w-1/3 h-screen bg-[#E1BCE8] justify-center flex-col text-center">
         <h1 className="font-bold">Safe&Sound</h1>
         <p>
@@ -12,6 +11,7 @@ export function PaymentPage() {
           psicologicas.
         </p>
       </div>
+      <h1>Información del pago</h1>
       <PayPalButtons
         createOrder={(data, actions) => {
           return actions.order.create({
