@@ -14,7 +14,7 @@ export default function Layout() {
         <Outlet />
       </section>
       {/* <footer>
-            Holi
+            
         </footer> */}
     </UserContextProvider>
     </main>

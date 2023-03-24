@@ -23,3 +23,12 @@ dist-ssr
 *.sln
 *.sw?
 yarn.lock
+dist
+hosting.cHVibGlj.cache
+hosting.ZGlzdA.cache
+.firebaserc
+firebase.json
+firestore.indexes.json
+firestore.rules
+storage.rules 
+

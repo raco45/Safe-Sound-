@@ -45,7 +45,7 @@ export function Navbar() {
             className="flex pl-2"
             onClick={handlewindow}
           >
-            <img className="w-auto h-12 inline mr-2" src="src\assets\logo.png" />
+            <img className="w-auto h-12 inline mr-2" src="src\assets\logo.png" alt="Safe&Sound Logo"/>
             <p className="text-2xl font-heading font-semibold text-[#3E0576] pt-1">Safe&Sound</p>
           </Link>
         </span>
@@ -80,7 +80,8 @@ export function Navbar() {
         <Link to={PROFILE_PAGE} className="pr-2" onClick={handlewindow}>
           {user.name}
         </Link>
-        <img className="h-10 w-auto inline" src="src\assets\User.png" />
+        {user.photoUrl && <img className="h-10 w-12 inline" src={user.photoUrl} alt="Perfil" />}
+        {!user.photoUrl && <img className="h-10 w-auto inline" src="src\assets\user.png" alt="Perfil"/>}        
       </span>
       <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
         <Link to={HOME_PAGE}>
