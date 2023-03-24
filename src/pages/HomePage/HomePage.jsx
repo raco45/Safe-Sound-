@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styles from "./HomePage.module.css";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
@@ -89,6 +88,7 @@ export function HomePage() {
         <Button disabled={false}>Enviar comentario</Button>
       </div>
       <br />
+
     </div>
   
   );
