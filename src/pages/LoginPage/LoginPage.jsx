@@ -25,7 +25,7 @@ export function LoginPage() {
       );
       navigate(PROFILE_PAGE);
     } catch (error) {
-      setError();
+      console.log(error);
     }
   };
 
@@ -56,7 +56,7 @@ export function LoginPage() {
               <h1 className="text-center">
                 Inicia sesión para continuar el camino a tu bienestar
               </h1>
-              <form onSubmit={handleSubmit(onSubmit, onError)}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-4">
                   <label
                     htmlFor="email"
