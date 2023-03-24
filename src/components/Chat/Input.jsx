@@ -37,10 +37,14 @@ export default function Input() {
 
     setText("");
   };
+
+  const handleKey= e=>{
+    e.code === "Enter" && handleSend();
+};
   return (
     <div className={styles.input}>
       
-      <input type="text" placeholder='Type something... ' onChange={e=>setText(e.target.value)} value={text}/>
+      <input type="text" placeholder='Type something... '  onKeyDown={handleKey} onChange={e=>setText(e.target.value)} value={text}/>
       <div className={styles.send}>
         <Send theme="filled" size="30" fill="#333" className={styles.enviar} onClick={handleSend}/>
       </div>

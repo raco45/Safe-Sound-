@@ -5,7 +5,6 @@ import { useUser } from '../../Contexts/UserContext';
 import { useChat } from '../../Contexts/ChatContext';
 
 export default function Message({message}) {
-  console.log(message);
 
   const {user}=useUser();
   const {data}=useChat();
