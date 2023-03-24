@@ -11,25 +11,27 @@ export function PaymentPage() {
           psicologicas.
         </p>
       </div>
-      <h1>Información del pago</h1>
-      <PayPalButtons
-        createOrder={(data, actions) => {
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  value: "13.99",
+      <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-[#FBE8FE]">
+        <h1>Información del pago</h1>
+        <PayPalButtons
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: "13.99",
+                  },
                 },
-              },
-            ],
-          });
-        }}
-        onApprove={async (data, actions) => {
-          const details = await actions.order.capture();
-          const name = details.payer.name.given_name;
-          alert("Transaction completed by " + name);
-        }}
-      />
+              ],
+            });
+          }}
+          onApprove={async (data, actions) => {
+            const details = await actions.order.capture();
+            const name = details.payer.name.given_name;
+            alert("Transaction completed by " + name);
+          }}
+        />
+      </div>
     </div>
   );
 }
