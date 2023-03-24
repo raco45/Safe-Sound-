@@ -20,7 +20,9 @@ import {
   PROFILE_PAGE,
   PAYMENT_PAGE,
   CHAT_PAGE,
+  PROFILE_PAGE_EDIT,
 } from "./constants/url";
+import { ProfilePageEdit } from "./pages/ProfilePageEdit/ProfilePageEdit";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -31,6 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path={LOGIN_PAGE} element={<LoginPage />} />
           <Route path={REGISTER_PAGE} element={<RegisterPage />} />
           <Route path={PROFILE_PAGE} element={ <PrivateRoute><UserProfilePage /></PrivateRoute>} />
+          <Route path={PROFILE_PAGE_EDIT} element={<PrivateRoute><ProfilePageEdit /></PrivateRoute>} />
           <Route path={PAYMENT_PAGE} element={<PrivateRoute><PaymentPage/></PrivateRoute>} />
           <Route path={CHAT_PAGE} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
           <Route path="/doctor" element={<DoctorProfilePage />} />
