@@ -1,5 +1,5 @@
 //METODOS DE AUTENTIFICACION
-
+import userPic from "../assets/user.png";
 import {
   FacebookAuthProvider,
   getAdditionalUserInfo,
@@ -11,7 +11,7 @@ import {
 import { auth, googleProvider } from "./config";
 import { createUserProfile } from "./users-service";
 
-export const signInWithGoogle = async () => {
+export const signInWithGoogle = async (useRol) => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
 
@@ -26,6 +26,9 @@ export const signInWithGoogle = async () => {
         phone: result.user.phoneNumber,
         photoUrl: result.user.photoURL,
         password: "",
+        role: useRol,
+        description: "",
+        country: "",
       });
     }
   } catch (error) {
@@ -59,6 +62,9 @@ export const registerWithEmailAndPassword = async (
   email,
   phone,
   password,
+  role,
+  description = "",
+  country = ""
 ) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -68,8 +74,11 @@ export const registerWithEmailAndPassword = async (
       lastname,
       email,
       phone,
-      profilePic: null,
+      photoUrl: userPic,
       password,
+      role,
+      description,
+      country,
     });
     console.log("Registro exitoso", result);
   } catch (error) {

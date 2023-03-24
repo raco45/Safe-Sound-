@@ -9,6 +9,7 @@ import { UserProfilePage } from "./pages/UserProfilePage/UserProfilePage";
 import { PaymentPage } from "./pages/PaymentPage/PaymentPage";
 import { ChatPage } from "./pages/ChatPage/ChatPage";
 import { DoctorProfilePage } from "./pages/DoctorProfilePage/DoctorProfilePage";
+import { DoctorCredentials } from "./pages/RegisterPage/DoctorCredentials";
 import Layout from "./components/Layout/Layout";
 import { PrivateRoute } from "./components/PrivateRoutes/PrivateRoute";
 import { UserContextProvider } from "../src/Contexts/UserContext";
@@ -19,6 +20,7 @@ import {
   PROFILE_PAGE,
   PAYMENT_PAGE,
   CHAT_PAGE,
+  DOCTOR_CREDENTIALS,
   PROFILE_PAGE_EDIT,
 } from "./constants/url";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
