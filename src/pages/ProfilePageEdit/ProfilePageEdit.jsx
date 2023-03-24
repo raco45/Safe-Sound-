@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { PROFILE_PAGE } from "../../constants/url";
-import { updateUserProfile } from "../../firebase/users-service";
+import { updateUserProfile, uploadPhoto } from "../../firebase/users-service";
 import { useUser } from "../../Contexts/UserContext";
 
 export function ProfilePageEdit() {
@@ -15,24 +15,29 @@ export function ProfilePageEdit() {
     formState: { errors },
   } = useForm({});
 
-  
   const onSubmit = async (data) => {
     try {
-      await updateUserProfile(user.id, { //actualizar datos en firebase/firestore
-        ...data,
+      //Subir la foto a storage y recobrar su URL
+      const imgUrl = await uploadPhoto(data.photo[0], data.photo[0].name)
+
+        //actualizar datos en firebase/firestore
+      await updateUserProfile(user.id, {
         name: data.name,
         lastname: data.lastname,
         phone: data.phone,
         country: data.country,
         description: data.description,
+        photoUrl: imgUrl,
       });
+      //actualizar datos del user para actualizar la UI
       setUser({
         ...user,
         name: data.name,
-        lastname: data.lastname,   //actualizar datos del user para actualizar la UI
+        lastname: data.lastname, 
         phone: data.phone,
         country: data.country,
         description: data.description,
+        photoUrl: imgUrl
       });
       navigate(PROFILE_PAGE);
     } catch (error) {
@@ -52,12 +57,33 @@ export function ProfilePageEdit() {
                     htmlFor="nombre"
                     className="block text-sm font-medium text-gray-700 undefined"
                   >
+                    Foto de perfil
+                  </label>
+                  <div className="flex flex-col items-start">
+                    <input
+                      {...register("photo", {
+                        required: "Foto de perfil es obligatoria",
+                      })}
+                      type="file"
+                      name="photo"
+                      accept="image/*"
+                      className="mb-4"
+                    />
+                    <p>{errors.photo?.message}</p>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <label
+                    htmlFor="nombre"
+                    className="block text-sm font-medium text-gray-700 undefined"
+                  >
                     Nombre
                   </label>
                   <div className="flex flex-col items-start">
                     <input
                       defaultValue={user.name}
-                      {...register("name",{
+                      {...register("name", {
                         required: "Nombre es obligatorio",
                       })}
                       type="name"
@@ -79,7 +105,7 @@ export function ProfilePageEdit() {
                   <div className="flex flex-col items-start">
                     <input
                       defaultValue={user.lastname ? user.lastname : ""}
-                      {...register("lastname",{
+                      {...register("lastname", {
                         required: "Apellido es obligatorio",
                       })}
                       type="text"
@@ -161,9 +187,7 @@ export function ProfilePageEdit() {
 
                 <div className="flex items-center mt-4">
                   <button
-                 
                     onClick={onsubmit}
-                   
                     className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3E0576] rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
                     form="formEdit"
                   >
