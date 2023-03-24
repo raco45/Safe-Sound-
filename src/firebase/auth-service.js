@@ -19,13 +19,13 @@ export const signInWithGoogle = async () => {
     if (isNewUser) {
       let cadena = result.user.displayName.split(" ");
       await createUserProfile(result.user.uid, {
+        id:result.user.uid,
         name: cadena[0],
         lastname: cadena[1],
         email: result.user.email, //TODO añadir los campos siguientes que puede tener el usuario
         phone: result.user.phoneNumber,
+        photoUrl: result.user.photoURL,
         password: "",
-        description: "",
-        country: "",
       });
     }
   } catch (error) {
@@ -59,19 +59,17 @@ export const registerWithEmailAndPassword = async (
   email,
   phone,
   password,
-  description = "",
-  country = ""
 ) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     await createUserProfile(result.user.uid, {
+      id: result.user.uid,
       name,
       lastname,
       email,
       phone,
+      profilePic: null,
       password,
-      description,
-      country,
     });
     console.log("Registro exitoso", result);
   } catch (error) {
