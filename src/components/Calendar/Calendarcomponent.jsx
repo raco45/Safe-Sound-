@@ -10,7 +10,7 @@ export function Calendarcomponent() {
 
     return (
         <>
-        <div className=' w-1/3 flex'>
+        <div className=' w-1/3 m-4 flex'>
             <div>
                 <Calendar onChange={setDate} value={date} onClickDay={() => setShowTime(true)} />
             </div> 

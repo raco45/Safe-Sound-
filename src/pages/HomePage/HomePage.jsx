@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
 import { Comment } from "../../components/Comment/Comment.jsx";
+import { Calendarcomponent } from "../../components/Calendar/Calendarcomponent";
 
 export function HomePage() {
   const [showMore, setShowMore] = useState(false);
@@ -88,7 +89,8 @@ export function HomePage() {
         <Button disabled={false}>Enviar comentario</Button>
       </div>
       <br />
-
+  
+          
     </div>
   
   );
