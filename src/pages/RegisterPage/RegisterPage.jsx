@@ -46,8 +46,12 @@ export function RegisterPage() {
 
   const handleSigninWithGoogle = async () => {
     await signInWithGoogle(useRol);
-    /* Poner condicion de que si cancela no se redirija*/
-    navigate(PROFILE_PAGE);
+    if (useRol === "Doctor"){
+      navigate(DOCTOR_CREDENTIALS);
+    }
+    else{
+      navigate(PROFILE_PAGE);
+    }
   };
 
   return (
