@@ -209,7 +209,7 @@ export function ProfilePageEdit() {
               <div className="mt-4 flex flex-col items-center">
                 <h1 className="font-bold">Foto de perfil actual</h1>
                 <br />
-                <img src={user.photoUrl} className=" h-44 w-auto" />
+                <img src={user.photoUrl} className=" h-44 w-44" />
               </div>
               <div className="mt-4">
                 <label
