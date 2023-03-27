@@ -16,7 +16,7 @@ export function RegisterPage() {
     formState: { errors },
   } = useForm({});
 
-  const [useRol, setRol] = useState("none")
+  const [useRol, setRol] = useState("none");
 
   const onSubmit = async (data) => {
     try {
@@ -26,7 +26,7 @@ export function RegisterPage() {
         data.email,
         data.phone,
         data.password,
-        useRol,
+        useRol
       );
       if (useRol === "Doctor"){
         navigate(DOCTOR_CREDENTIALS);
@@ -35,7 +35,7 @@ export function RegisterPage() {
         navigate(PROFILE_PAGE);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   
   };
@@ -73,16 +73,22 @@ export function RegisterPage() {
               </h1>
 
               <div className="flex flex-col items-start">
-                    <select
-                      id="roles"
-                      name="rol"
-                      value={useRol} 
-                      onChange={e => setRol(e.target.value)}
-                    >
-                        <option value="none">Elegir</option>
-                        <option value={"Doctor"}>Doctor</option>
-                        <option value={"Paciente"}>Paciente</option>
-                    </select>
+                <label
+                  htmlFor="rol"
+                  className="block text-sm font-medium text-gray-700 undefined"
+                >
+                  Elija cómo desea ingresar
+                </label>
+                <select
+                  id="roles"
+                  name="rol"
+                  value={useRol}
+                  onChange={(e) => setRol(e.target.value)}
+                >
+                  <option value="none">Elegir</option>
+                  <option value={"Doctor"}>Doctor</option>
+                  <option value={"Paciente"}>Paciente</option>
+                </select>
               </div>
 
               <form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -229,9 +235,11 @@ export function RegisterPage() {
               <div className="mt-4 text-grey-600">
                 ¿Ya tienes una cuenta?{" "}
                 <span>
-                  <Link to={LOGIN_PAGE} className="text-purple-600 hover:underline">
+                  <Link
+                    to={LOGIN_PAGE}
+                    className="text-purple-600 hover:underline"
+                  >
                     {" "}
-                    
                     Inicia Sesión
                   </Link>
                 </span>
