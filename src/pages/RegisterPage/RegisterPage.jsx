@@ -6,7 +6,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 // import styles from "./RegisterPage.module.css"
-import { LOGIN_PAGE, PROFILE_PAGE } from "../../constants/url";
+import { LOGIN_PAGE, PROFILE_PAGE, DOCTOR_CREDENTIALS } from "../../constants/url";
 
 export function RegisterPage() {
   const navigate = useNavigate();
@@ -28,10 +28,16 @@ export function RegisterPage() {
         data.password,
         useRol,
       );
-      navigate(PROFILE_PAGE);
+      if (useRol === "Doctor"){
+        navigate(DOCTOR_CREDENTIALS);
+      }
+      else{
+        navigate(PROFILE_PAGE);
+      }
     } catch (error) {
       console.log(error)
     }
+  
   };
 
   const onError = () => {
@@ -152,7 +158,11 @@ export function RegisterPage() {
                     <input
                       {...register("phone", {
                         required: "phone es obligatorio",
-                        maxLength: 20,
+                        maxLength: {
+                          value: 15,
+                          // pattern:"[0-9]{5}[-][0-9]{7}[-][0-9]{1}",
+                          message: "Ingreso mas de 15 caracteres"
+                        }
                       })}
                       type="phone"
                       name="phone"
@@ -172,7 +182,10 @@ export function RegisterPage() {
                     <input
                       {...register("password", {
                         required: "Contraseña es obligatoria",
-                        minLength: 6, /* TODO agregar mensaje de validacion password min6 */
+                        minLength:{
+                          value: 6,
+                          message: "Debe tener al menos 6 caracteres"
+                        } 
                       })}
                       type="password"
                       name="password"
