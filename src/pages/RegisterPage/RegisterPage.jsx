@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   signInWithGoogle,
   registerWithEmailAndPassword,
@@ -16,6 +16,8 @@ export function RegisterPage() {
     formState: { errors },
   } = useForm({});
 
+  const [useRol, setRol] = useState("none")
+
   const onSubmit = async (data) => {
     try {
       await registerWithEmailAndPassword(
@@ -23,7 +25,8 @@ export function RegisterPage() {
         data.lastname,
         data.email,
         data.phone,
-        data.password
+        data.password,
+        useRol,
       );
       navigate(PROFILE_PAGE);
     } catch (error) {
@@ -36,7 +39,7 @@ export function RegisterPage() {
   };
 
   const handleSigninWithGoogle = async () => {
-    await signInWithGoogle();
+    await signInWithGoogle(useRol);
     /* Poner condicion de que si cancela no se redirija*/
     navigate(PROFILE_PAGE);
   };
@@ -58,6 +61,20 @@ export function RegisterPage() {
               <h1 className="text-center">
                 Regístrate para alcanzar el camino a tu bienestar
               </h1>
+
+              <div className="flex flex-col items-start">
+                    <select
+                      id="roles"
+                      name="rol"
+                      value={useRol} 
+                      onChange={e => setRol(e.target.value)}
+                    >
+                        <option value="none">Elegir</option>
+                        <option value={"Doctor"}>Doctor</option>
+                        <option value={"Paciente"}>Paciente</option>
+                    </select>
+              </div>
+
               <form onSubmit={handleSubmit(onSubmit, onError)}>
                 <div className="mt-4">
                   <label
@@ -155,7 +172,7 @@ export function RegisterPage() {
                     <input
                       {...register("password", {
                         required: "Contraseña es obligatoria",
-                        minLength: 6,
+                        minLength: 6, /* TODO agregar mensaje de validacion password min6 */
                       })}
                       type="password"
                       name="password"
@@ -183,6 +200,7 @@ export function RegisterPage() {
                 <div className="flex items-center mt-4">
                   {/* Sumamente pendiente con este onclick, se estaba confudiendo con la funcion */}
                   <button
+                    disabled={useRol.match("none")}
                     onClick={onsubmit}
                     className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3E0576] rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
                   >
@@ -208,6 +226,7 @@ export function RegisterPage() {
               </div>
               <div className="my-6 space-y-2">
                 <button
+                  disabled={useRol.match("none")}
                   onClick={handleSigninWithGoogle}
                   aria-label="Login with Google"
                   role="button"

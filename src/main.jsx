@@ -9,6 +9,7 @@ import { UserProfilePage } from "./pages/UserProfilePage/UserProfilePage";
 import { PaymentPage } from "./pages/PaymentPage/PaymentPage";
 import { ChatPage } from "./pages/ChatPage/ChatPage";
 import { DoctorProfilePage } from "./pages/DoctorProfilePage/DoctorProfilePage";
+import { DoctorCredentials } from "./pages/RegisterPage/DoctorCredentials";
 import Layout from "./components/Layout/Layout";
 import {PrivateRoute} from './components/PrivateRoutes/PrivateRoute'
 import { UserContextProvider } from '../src/Contexts/UserContext'
@@ -20,17 +21,23 @@ import {
   PROFILE_PAGE,
   PAYMENT_PAGE,
   CHAT_PAGE,
+  DOCTOR_CREDENTIALS,
   PROFILE_PAGE_EDIT,
 } from "./constants/url";
+import { ChatContextProvider } from "./Contexts/ChatContext";
 import { ProfilePageEdit } from "./pages/ProfilePageEdit/ProfilePageEdit";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+  <UserContextProvider>
+
+  <ChatContextProvider>
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path={HOME_PAGE} element={<HomePage />} />
           <Route path={LOGIN_PAGE} element={<LoginPage />} />
+          <Route path={DOCTOR_CREDENTIALS} element={<DoctorCredentials />} />
           <Route path={REGISTER_PAGE} element={<RegisterPage />} />
           <Route path={PROFILE_PAGE} element={ <PrivateRoute><UserProfilePage /></PrivateRoute>} />
           <Route path={PROFILE_PAGE_EDIT} element={<PrivateRoute><ProfilePageEdit /></PrivateRoute>} />
@@ -43,4 +50,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
+  </ChatContextProvider>
+  </UserContextProvider>
 );
