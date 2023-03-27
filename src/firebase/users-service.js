@@ -13,6 +13,7 @@ import { storage } from "./config";
 
 export async function createUserProfile(userId,data){
     setDoc(doc(db, "userChats",userId),{});
+    setDoc(doc(db, "userInvoices",userId),[]);
     return setDoc(doc(db,"users",userId),data)
 }
 
