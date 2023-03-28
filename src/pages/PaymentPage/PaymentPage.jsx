@@ -65,7 +65,7 @@ export function PaymentPage() {
               }}
               onApprove={async (data, actions) => {
                 const details = await actions.order.capture();
-                
+                handleApprove(data.orderID);
                 const name = details.payer.name.given_name;
                 alert("Transaction completed by " + name);
               }}
