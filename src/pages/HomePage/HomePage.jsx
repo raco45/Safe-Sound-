@@ -8,21 +8,6 @@ import { Comment } from "../../components/Comment/Comment.jsx";
 export function HomePage() {
   const [showMore, setShowMore] = useState(false);
 
-  //Lista de ejemplo para probar los miniperfiles
-  const doctors = [
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-  ];
 
   //activa o desactiva el estado de showMore
   const handleShowMore = () => {
@@ -30,7 +15,7 @@ export function HomePage() {
   };
 
   //numero que indica hasta que cantidad se corta la lista
-  const numList = showMore || doctors.length < 6 ? doctors.length : 6;
+  // const numList = showMore || doctors.length < 6 ? doctors.length : 6;
 
   return (
     <div className="flex flex-col justify-center items-center bg-[#FBE8FE]">
@@ -54,15 +39,15 @@ export function HomePage() {
         id="doctores"
         className="grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
       >
-        {doctors.length === 0 ? (
+        {/* {doctors.length === 0 ? (
           <h1 className="text-xl font-maintext font-bold"> 
             No se han encontrado resultados
           </h1>
         ) : (
           doctors.slice(0, numList).map((doctor) => {
-            return doctor;                              {/* mostrar los miniperfiles que haya disponibles */}
+            return doctor;                             
           })
-        )}
+        )} */}
       </div>
       <Button onClick={handleShowMore} disabled={false}>
         {showMore ? "Mostrar menos" : "Mostrar más"}

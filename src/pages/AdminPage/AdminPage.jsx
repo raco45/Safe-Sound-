@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
-import { useDoctor } from "../../hooks/useDoctor";
+import { useUsuarios } from "../../hooks/useUsuarios";
 
 export function AdminPage() {
-  const { getNotValidatedDoctor, doctors, isLoading } = useDoctor();
+  const { getNotValidatedDoctor, doctors, isLoading, getAllUsers, users} = useUsuarios();
 
   useEffect(() => {
     getNotValidatedDoctor();
+    getAllUsers()
   }, []);
 
   return (
@@ -16,7 +17,7 @@ export function AdminPage() {
         {isLoading && <h1 className="font-bold text-2xl">CARGANDO USUARIOS</h1>}
         {!isLoading && (
           <>
-            <h1 className="font-semibold text-xl mb-4">
+            <h1 className="font-semibold text-2xl mb-4">
               Validación de doctores
             </h1>
             <div
@@ -25,7 +26,23 @@ export function AdminPage() {
             >
               {doctors.map((doctor) => {
                 return (
-                  <Miniperfil user={doctor} idx={doctor.id} adminMode={true} />
+                  <Miniperfil user={doctor} idx={doctor.id} validateMode={true} />
+                );
+              })}
+            </div>
+
+
+            <h1 className="font-semibold text-2xl my-4">
+              
+              Usuarios registrados
+            </h1>
+            <div
+              className="border-2 border-solid border-black rounded-xl grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
+              id="doctores_no_validados"
+            >
+              {users.map((user) => {
+                return (
+                  <Miniperfil user={user} idx={user.id} adminViewMode={true} />
                 );
               })}
             </div>
