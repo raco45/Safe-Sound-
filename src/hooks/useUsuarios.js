@@ -6,6 +6,7 @@ export function useUsuarios() {
   const [isLoading, setLoading] = useState(false);
   const [doctors, setDoctor] = useState([])
   const [users, setUsers] = useState([])
+  const [valDoctors, setValDoctors] = useState([])
 
   const getNotValidatedDoctor = async () => {
     setLoading(true)
@@ -51,7 +52,28 @@ export function useUsuarios() {
 
   }
 
-  
+  const getValidatedDoctor = async () => {
+    setLoading(true)
 
-  return {getNotValidatedDoctor, doctors, isLoading, users, getAllUsers};
+    const doctorQuery = query(
+      collection(db, "users"),
+      where("role", "==", "Doctor"),
+      where("validated", "==", true)
+    );
+
+    const results = await getDocs(doctorQuery);
+
+    const docArr = []
+    results.forEach(doc => {
+        docArr.push(doc.data())
+        
+    })
+
+    setValDoctors(docArr)
+
+    setLoading(false)
+    
+  };
+
+  return {getNotValidatedDoctor, doctors, isLoading, users, getAllUsers, getValidatedDoctor, valDoctors};
 }
