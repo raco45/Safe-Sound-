@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
 export function PaymentPage() {
+  const [paidFor, setPaidFor] = useState(false);
+
+  const handleApprove = (orderId) => {
+    //backend
+
+    setPaidFor(true);
+    if (paidFor) {
+      
+    }
+  }
+  
   return (
     <div className="flex">
       <div className="flex w-1/3 h-screen bg-[#E1BCE8] justify-center flex-col text-center">
@@ -54,6 +65,7 @@ export function PaymentPage() {
               }}
               onApprove={async (data, actions) => {
                 const details = await actions.order.capture();
+                
                 const name = details.payer.name.given_name;
                 alert("Transaction completed by " + name);
               }}
