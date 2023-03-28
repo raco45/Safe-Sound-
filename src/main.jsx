@@ -22,11 +22,13 @@ import {
   CHAT_PAGE,
   DOCTOR_CREDENTIALS,
   PROFILE_PAGE_EDIT,
+  ADMIN_PAGE
 } from "./constants/url";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { CLIENT_ID } from "./constants/paypal-info";
 import { ChatContextProvider } from "./Contexts/ChatContext";
 import { ProfilePageEdit } from "./pages/ProfilePageEdit/ProfilePageEdit";
+import {AdminPage} from "./pages/AdminPage/AdminPage";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <UserContextProvider>
