@@ -86,6 +86,7 @@ export const registerWithEmailAndPassword = async (
   }
 };
 
+
 export const logout = async () => {
   try {
     await signOut(auth);
