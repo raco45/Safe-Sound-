@@ -9,10 +9,9 @@ export function DoctorEdit() {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(false)
-    const [useRange, setRange] = useState(user.range)
-    const [specialty, setSpecialty] = useState([])
-
-    console.log(useRange)
+    const nya = user.range
+    const [range, setRange] = useState(nya)
+    let planes = user.plans
 
     const {
         register,
@@ -22,7 +21,7 @@ export function DoctorEdit() {
 
     const onSubmit = async (data) => {
         try {
-            
+
             setLoading(true)
             //actualizar datos en firebase/firestore
             await updateUserProfile(user.id, {
@@ -31,8 +30,7 @@ export function DoctorEdit() {
                 phone: data.phone,
                 country: data.country,
                 description: data.description,
-                range: useRange,
-                specialty: specialty,
+
 
             });
             //actualizar datos del user para actualizar la UI
@@ -76,23 +74,52 @@ export function DoctorEdit() {
         }
     };
 
-    const tempArr = !user.specialty ? [] : user.specialty
-    const handleSpecialty = ()=>{
-        const inputValue  = document.getElementById("especialidades")
-        tempArr.push(inputValue.value)
-        setSpecialty(tempArr)
-        console.log(inputValue.value)
-        console.log(tempArr)
-        console.log(specialty)
+
+    const onRangeChange = (e) => {
+        setRange(e.target.value)
+        console.log(range)
     }
 
-    const handleRange = () => {
-        const buttonValue = 
+    const handlePlan = (e) => {
+        const valor = document.getElementById('plan1')
+        planes.push(valor.value)
+        setUser({ ...user, plans: planes })
     }
+
+    const handleBorrar = (e) => {
+        user.plans = []
+        planes = user.plans
+        setUser({ ...user, plans: planes })
+    }
+
+
+    const handleConsults = async () => {
+       try {
+            setLoading(true)
+            const specialtiesVal = document.getElementById('specialities')
+            const plansValue = document.getElementById('plandescription')
+            await updateUserProfile(user.id, {
+                specialties: specialtiesVal.value,
+                range: range,
+                plans: planes,
+                plansdescription: plansValue.value,
+
+
+            })
+            setUser({ ...user, range: range, plans: planes })
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+        }
+        navigate(PROFILE_PAGE)
+    }
+
+
+
 
     return (
         <div className="flex justify-center">
-            <div className=" flex w-2/3 h-screen bg-[#FBE8FE] flex-col ">
+            <div className="flex w-2/3 h-screen bg-[#FBE8FE] flex-col">
                 <div>
                     <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-[#FBE8FE] mb-10">
                         {isLoading && (<h1 className="text-[#3E0576] font-bold text-xl mt-4">GUARDANDO CAMBIOS...</h1>)}
@@ -209,23 +236,6 @@ export function DoctorEdit() {
                                         <p>{errors.description?.message}</p>
                                     </div>
                                 </div>
-                                <label
-                                    htmlFor="especialidades"
-                                    className="block text-sm font-medium text-gray-700 undefined"
-                                    >
-                                        Especialidades:
-                                    </label>
-                                    <input id="especialidades" name="especialidades" placeholder="Inserta una especialidad"  ></input>
-                                    <button onClick={handleSpecialty}>ok</button>
-                                <label
-                                    htmlFor="rango"
-                                    className="block text-sm font-medium text-gray-700 undefined"
-                                >
-                                    Rango de precios:
-                                </label>
-                                <button value="Bajo" onClick={}>Bajo</button>
-                                <button value="Medio">Medio</button>
-                                <button value="Alto">Alto</button>
                                 <div className="flex items-center mt-4">
                                     <button
                                         onClick={onsubmit}
@@ -273,10 +283,96 @@ export function DoctorEdit() {
                                 Cambiar foto de perfil
                             </button>
                         </div>
+
+                        {/*LO QUE SIGUE SON LAS CARACTERISTICAS UNICAS DEL DOCTOR */}
+                        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-lg sm:rounded-lg">
+                            <p>Cuentanos sobre tus consultas...</p>
+                            <div className="mt-4">
+                                <label
+                                    htmlFor="specialities"
+                                    className="block text-sm font-medium text-gray-700 undefined"
+                                >
+                                    Especialidades:
+                                </label>
+                                <div className="flex flex-col items-start">
+                                    <textarea
+                                        id='specialities'
+                                        defaultValue={user.specialties ? user.specialties : ""}
+                                        name="specialities"
+                                        placeholder={
+                                            user.specialties ? user.specialties : "Ej: Ansiedad, Adolescentes,..."
+                                        }
+                                        className="block w-full mt-1 pl-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2"
+                                    />
+                                </div>
+                                <div className="mt-4">
+                                    <label
+                                        htmlFor="range"
+                                        className="block text-sm font-medium text-gray-700 undefined"
+                                    >
+                                        Rango de precios:
+                                    </label>
+                                    <div className="flex flex-col items-start">
+                                        <label htmlFor="bajo">Bajo</label>
+                                        <input type="radio" name="pricerange" value="Bajo" id="bajo" checked={range === "Bajo"} onChange={onRangeChange} />
+
+                                        <label htmlFor="medio">Medio</label>
+                                        <input type="radio" name="pricerange" value="Medio" id="medio" checked={range === "Medio"} onChange={onRangeChange} />
+
+                                        <label htmlFor="alto">Alto</label>
+                                        <input type="radio" name="pricerange" value="Alto" id="alto" checked={range === "Alto"} onChange={onRangeChange} />
+                                    </div>
+                                    <label
+                                        htmlFor="planes"
+                                        className="block text-sm font-medium text-gray-700 undefined"
+                                    >
+                                        Cuéntanos de tus planes: 
+                                    </label>
+                                    <p>Inserta el precio de tus planes ($$). </p>
+                                    <div className="flex items-start mt-2">
+                                        <input
+                                            defaultValue={user.planes ? user.planes[0] : ""}
+                                            type="number"
+                                            id="plan1"
+                                            name="plan"
+                                            min='1'
+                                            className="block border-2 border-purple-600 w-32  mt-1 pl-2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                        />
+                                        <button className="m-4 mt-1 hover:text-purple-600" onClick={handlePlan}>Agregar</button>
+                                        <button className="m-4 mt-1 hover:text-purple-600" onClick={handleBorrar}>Borrar planes</button>
+                                        <div className="block border-2 border-purple-600 w-32  mt-1 pl-2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 " >{ planes.map((plan)=>{return plan+" ,"})}</div>  
+                                    </div>
+                                    <p>Describe tus planes en el siguiente espacio.</p>
+                                    <textarea
+                                            defaultValue={user.plandescription ? user.plandescription : ""}
+                                            name="description"
+                                            id='plandescription'
+                                            placeholder={
+                                                user.plandescription ? user.plandescription : "Ej: Plan de $15: cuenta con una cita individual..."
+                                            }
+                                            className="block w-full mt-1 pl-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2"
+                                        />
+
+                                    <label
+                                        htmlFor="horario"
+                                        className="block text-sm mt-4 font-medium text-gray-700 undefined"
+                                    >
+                                        Ahora sobre tu horario, ¿cuáles días NO tienes libres? : 
+                                    </label>
+                                    <button
+                                        onClick={handleConsults}
+                                        className="w-full mt-4 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3E0576] rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+                                    >
+
+                                        Guardar cambios
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button className="w-30 mb-10 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3E0576] rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 mt-6">
+                            <Link to={PROFILE_PAGE}>Cancelar y regresar a perfil</Link>
+                        </button>
                     </div>
-                    <button className="w-30 mb-10 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3E0576] rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 mt-6">
-                        <Link to={PROFILE_PAGE}>Cancelar y regresar a perfil</Link>
-                    </button>
                 </div>
             </div>
         </div>
