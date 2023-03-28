@@ -76,19 +76,19 @@ export function useUsuarios() {
     
   };
 
-  const getSingleDoctor=async (doctorid) =>{
-    setLoading(true)
-    const doctorQuery = query(
-      collection(db, "users"),
-      where("id", "==", doctorid)
-    );
-    const result = await getDoc(doctorQuery)
-    // setSingleDoctor(result.data())
-    console.log(result.data())
+  // const getSingleDoctor=async (doctorid) =>{
+  //   setLoading(true)
+  //   const doctorQuery = query(
+  //     collection(db, "users"),
+  //     where("id", "==", doctorid)
+  //   );
+  //   const result = await getDoc(doctorQuery)
+  //   // setSingleDoctor(result.data())
+  //   console.log(result.data())
      
-    setLoading(false)
+  //   setLoading(false)
 
-  }
+  // }
 
   return {getNotValidatedDoctor, doctors, isLoading, users, getAllUsers, getValidatedDoctor, valDoctors, getSingleDoctor};
 }
