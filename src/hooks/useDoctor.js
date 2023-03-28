@@ -1,0 +1,35 @@
+import { query, where, getDocs, collection } from "firebase/firestore";
+import { db } from "../firebase/config";
+import React, { useState } from "react";
+
+export function useDoctor() {
+  const [isLoading, setLoading] = useState(false);
+  const [doctors, setDoctor] = useState([])
+
+  const getNotValidatedDoctor = async () => {
+    setLoading(true)
+
+    const doctorQuery = query(
+      collection(db, "users"),
+      where("role", "==", "Doctor"),
+      where("validated", "==", false)
+    );
+
+    const results = await getDocs(doctorQuery);
+
+    const docArr = []
+    results.forEach(doc => {
+        docArr.push(doc.data())
+        
+    })
+
+    setDoctor(docArr)
+
+    setLoading(false)
+    
+  };
+
+  
+
+  return {getNotValidatedDoctor, doctors, isLoading};
+}
