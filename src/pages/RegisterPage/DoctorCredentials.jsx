@@ -43,15 +43,15 @@ export function DoctorCredentials() {
 
 
   return (
-    <div className="flex">
-      <div className=" flex w-1/3 h-screen bg-[#E1BCE8] justify-center flex-col text-center">
+    <div className="flex justify-center">
+      <div className=" hidden md:flex w-1/3 h-auto bg-[#E1BCE8] justify-center flex-col text-center">
         <h1 className="font-bold">Safe&Sound</h1>
         <p>
         Encuentra a los mejores especialistas que te brindarán el mejor servicio en materia psicológica.
         </p>
       </div>
 
-      <div className=" flex w-2/3 h-screen bg-[#FBE8FE] flex-col">
+      <div className=" flex w-2/3 h-full bg-[#FBE8FE] flex-col">
         <div>
           <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-[#FBE8FE]">
             <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-lg sm:rounded-lg">
