@@ -7,7 +7,7 @@ import { useChat } from '../../Contexts/ChatContext';
 export default function Message({message}) {
 
   const {user}=useUser();
-  const {data}=useChat();
+  const {data, currentUser}=useChat();
 
   const ref = useRef();
 
@@ -21,8 +21,7 @@ export default function Message({message}) {
       ref={ref} 
       className={message.senderId===user.id ? styles.message:styles.messageOwner  }>
        <div className={styles.messageInfo}>
-        <img src={ user.photoUrl} alt=''/>
-        <span>Just now</span>
+        <img src={ message.senderId===user.id ? user.photoUrl:currentUser.photoUrl} alt=''/>
        </div>
        <div className={styles.messageContent}>
         <p>{message.text}</p>

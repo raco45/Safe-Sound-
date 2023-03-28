@@ -7,7 +7,7 @@ import Search from './Search';
 function Sidebar() {
   return (
     <div className={styles.sidebar}>
-        <NavbarChat/>
+        {/* <NavbarChat/> */}
         <Search/>
         <Chats/>
         

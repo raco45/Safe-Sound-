@@ -13,6 +13,9 @@ export default function Search() {
 
     const {user}= useUser();
     
+    let myDate = new Date();
+    let fecha= myDate.getDate().toString() +" "+ myDate.getMonth().toString()+" "+myDate.getFullYear().toString();
+    let date=[myDate.getDate, myDate.getMonth, myDate.getFullYear];
     const handleSearch= async()=>{
         const q=query(
             collection(db,"users"),
@@ -22,9 +25,13 @@ export default function Search() {
         try{
             const querySnapshot= await getDocs(q);
             querySnapshot.forEach((doc)=>{
-                setcurrentUser(doc.data());
+                if(doc.data().role===user.role){
+                    setcurrentUser(null);   
+                }else{
+                    setcurrentUser(doc.data());
+                }
+
             });
-            
         }catch(err){
             setErr(true);
         }
@@ -51,6 +58,7 @@ export default function Search() {
                 await updateDoc(doc(db, "userChats",user.id),
                 {
                     [combinedId+".userInfo"]:{
+                        fechaCita: date,
                         id: currentUser.id,
                         displayName: currentUser.name,
                         photoUrl: currentUser.photoUrl,
@@ -60,6 +68,7 @@ export default function Search() {
                 await updateDoc(doc(db, "userChats",currentUser.id),
                 {
                     [combinedId+".userInfo"]:{
+                        fechaCita: date,
                         id: user.id,
                         displayName: user.name,
                         photoUrl: user.photoUrl,
@@ -73,19 +82,17 @@ export default function Search() {
         }
 
 
-
         setcurrentUser(null);
         setUsername("");
-
+        
     };
-
+    
   return (
     <div className={styles.search}>
-        
         <div className={styles.searchForm}>
             <input type ="text" placeholder='Find a User' onKeyDown={handleKey} onChange={e=>setUsername(e.target.value)} value={username} />
         </div>
-        {err && <span> User not found  </span>}
+        
         {currentUser && <div className={styles.userChat} onClick={handleSelect}>
             <img src={currentUser.photoUrl} alt=""/>
             <div className={styles.userChatInfo}>
