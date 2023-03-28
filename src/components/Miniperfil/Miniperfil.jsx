@@ -28,8 +28,8 @@ export function Miniperfil({ user, validateMode, idx, adminViewMode }) {
 
   return (
     <div>
-      <Link to={DOCTOR_PROFILE}>
-      <div classNameName="p-4 w-80 container mx-auto bg-[#b990c0] rounded-xl shadow-md mb-5 hover:bg-[#ceafd3] h-auto">
+     
+      <div className="p-4 w-80 container mx-auto bg-[#b990c0] rounded-xl shadow-md mb-5 hover:bg-[#ceafd3] h-auto">
         <div className="grid grid-cols-3 gap-x-4 items-center">
           <div className="col-span-2 p-2 fonttext-xl text-black font-maintext font-bold">
             {user.name} {user.lastname}
@@ -77,7 +77,7 @@ export function Miniperfil({ user, validateMode, idx, adminViewMode }) {
           </>
         )}
       </div>
-      </Link>
+      
     </div>
   );
 }
