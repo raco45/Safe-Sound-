@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
-import { Link } from 'react-router-dom';
 import { DOCTOR_PROFILE } from '../../constants/url';import { Button } from "../Button/Button";
 import { updateUserProfile, deleteUserProfile } from "../../firebase/users-service";
 
@@ -54,7 +53,7 @@ export function Miniperfil({ user, validateMode, idx, adminViewMode }) {
         {user.role === "Doctor" && (
           <>
             <div className="text-black flex font-maintext ">
-              Especialidades: {/*Aqui se iguala el campo especialidad*/}
+              Especialidades: {user.specialties}
             </div>
             <div className="ml-60 w-12 grid justify-items-center rounded-xl font-maintext text-black bg-[#fbe8fe] pb-1">
               x/10
