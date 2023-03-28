@@ -94,10 +94,11 @@ export function DoctorEdit() {
 
 
     const handleConsults = async () => {
-       try {
+        const specialtiesVal = document.getElementById('specialities')
+        const plansValue = document.getElementById('plandescription')
+        try {
             setLoading(true)
-            const specialtiesVal = document.getElementById('specialities')
-            const plansValue = document.getElementById('plandescription')
+
             await updateUserProfile(user.id, {
                 specialties: specialtiesVal.value,
                 range: range,
@@ -106,7 +107,7 @@ export function DoctorEdit() {
 
 
             })
-            setUser({ ...user, range: range, plans: planes })
+            setUser({ ...user, range: range, plans: planes, plansdescription: plansValue.value, })
             setLoading(false)
         } catch (error) {
             console.log(error);
@@ -312,7 +313,7 @@ export function DoctorEdit() {
                                     >
                                         Rango de precios:
                                     </label>
-                                    <div className="flex flex-col items-start">
+                                    <div className="flex mt-4 mb-4 flex-col items-start">
                                         <label htmlFor="bajo">Bajo</label>
                                         <input type="radio" name="pricerange" value="Bajo" id="bajo" checked={range === "Bajo"} onChange={onRangeChange} />
 
@@ -326,7 +327,7 @@ export function DoctorEdit() {
                                         htmlFor="planes"
                                         className="block text-sm font-medium text-gray-700 undefined"
                                     >
-                                        Cuéntanos de tus planes: 
+                                        Cuéntanos de tus planes:
                                     </label>
                                     <p>Inserta el precio de tus planes ($$). </p>
                                     <div className="flex items-start mt-2">
@@ -336,29 +337,24 @@ export function DoctorEdit() {
                                             id="plan1"
                                             name="plan"
                                             min='1'
+                                            step='4'
                                             className="block border-2 border-purple-600 w-32  mt-1 pl-2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                         />
                                         <button className="m-4 mt-1 hover:text-purple-600" onClick={handlePlan}>Agregar</button>
                                         <button className="m-4 mt-1 hover:text-purple-600" onClick={handleBorrar}>Borrar planes</button>
-                                        <div className="block border-2 border-purple-600 w-32  mt-1 pl-2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 " >{ planes.map((plan)=>{return plan+" ,"})}</div>  
+                                        <div className="block border-2 border-purple-600 w-32  mt-1 pl-2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 " >{planes.map((plan) => { return plan + ", " })}</div>
                                     </div>
                                     <p>Describe tus planes en el siguiente espacio.</p>
                                     <textarea
-                                            defaultValue={user.plandescription ? user.plandescription : ""}
-                                            name="description"
-                                            id='plandescription'
-                                            placeholder={
-                                                user.plandescription ? user.plandescription : "Ej: Plan de $15: cuenta con una cita individual..."
-                                            }
-                                            className="block w-full mt-1 pl-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2"
-                                        />
+                                        defaultValue={user.plansdescription ? user.plansdescription : ""}
+                                        name="description"
+                                        id='plandescription'
+                                        placeholder={
+                                            user.plansdescription ? user.plansdescription : "Ej: Plan de $15: cuenta con una cita individual..."
+                                        }
+                                        className="block w-full mt-1 pl-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2"
+                                    />
 
-                                    <label
-                                        htmlFor="horario"
-                                        className="block text-sm mt-4 font-medium text-gray-700 undefined"
-                                    >
-                                        Ahora sobre tu horario, ¿cuáles días NO tienes libres? : 
-                                    </label>
                                     <button
                                         onClick={handleConsults}
                                         className="w-full mt-4 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3E0576] rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
