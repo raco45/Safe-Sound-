@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { registerInvoice } from "../../firebase/paypal-service";
 
 export function PaymentPage() {
   const [paidFor, setPaidFor] = useState(false);
@@ -9,7 +10,7 @@ export function PaymentPage() {
 
     setPaidFor(true);
     if (paidFor) {
-      
+      registerInvoice("13.99");
     }
   }
   
