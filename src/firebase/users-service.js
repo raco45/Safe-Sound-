@@ -6,10 +6,12 @@ import {
   query,
   getDocs,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "./config";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import { storage } from "./config";
+import { deleteUser } from "firebase/auth";
 
 export async function createUserProfile(userId,data){
     setDoc(doc(db, "userChats",userId),{});
@@ -43,7 +45,7 @@ export async function updateUserProfile(userId, data) {
 
 
 export async function uploadPhoto(file, fileName) {
-  console.log(file);
+  
   const usersImagesRef = ref(storage, `profilepics/${fileName}`);
 
   await uploadBytes(usersImagesRef, file);
@@ -52,4 +54,11 @@ export async function uploadPhoto(file, fileName) {
 
   return imgUrl
   
+}
+
+export async function deleteUserProfile(userId){
+  const userRef = doc(db, "users", userId);
+  
+  await deleteDoc(userRef)
+
 }

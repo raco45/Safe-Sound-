@@ -6,7 +6,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 // import styles from "./RegisterPage.module.css"
-import { LOGIN_PAGE, PROFILE_PAGE } from "../../constants/url";
+import { LOGIN_PAGE, PROFILE_PAGE, DOCTOR_CREDENTIALS } from "../../constants/url";
 
 export function RegisterPage() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export function RegisterPage() {
     formState: { errors },
   } = useForm({});
 
-  const [useRol, setRol] = useState("none")
+  const [useRol, setRol] = useState("none");
 
   const onSubmit = async (data) => {
     try {
@@ -26,12 +26,18 @@ export function RegisterPage() {
         data.email,
         data.phone,
         data.password,
-        useRol,
+        useRol
       );
-      navigate(PROFILE_PAGE);
+      if (useRol === "Doctor"){
+        navigate(DOCTOR_CREDENTIALS);
+      }
+      else{
+        navigate(PROFILE_PAGE);
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  
   };
 
   const onError = () => {
@@ -40,8 +46,12 @@ export function RegisterPage() {
 
   const handleSigninWithGoogle = async () => {
     await signInWithGoogle(useRol);
-    /* Poner condicion de que si cancela no se redirija*/
-    navigate(PROFILE_PAGE);
+    if (useRol === "Doctor"){
+      navigate(DOCTOR_CREDENTIALS);
+    }
+    else{
+      navigate(PROFILE_PAGE);
+    }
   };
 
   return (
@@ -63,16 +73,22 @@ export function RegisterPage() {
               </h1>
 
               <div className="flex flex-col items-start">
-                    <select
-                      id="roles"
-                      name="rol"
-                      value={useRol} 
-                      onChange={e => setRol(e.target.value)}
-                    >
-                        <option value="none">Elegir</option>
-                        <option value={"Doctor"}>Doctor</option>
-                        <option value={"Paciente"}>Paciente</option>
-                    </select>
+                <label
+                  htmlFor="rol"
+                  className="block text-sm font-medium text-gray-700 undefined"
+                >
+                  Elija cómo desea ingresar
+                </label>
+                <select
+                  id="roles"
+                  name="rol"
+                  value={useRol}
+                  onChange={(e) => setRol(e.target.value)}
+                >
+                  <option value="none">Elegir</option>
+                  <option value={"Doctor"}>Doctor</option>
+                  <option value={"Paciente"}>Paciente</option>
+                </select>
               </div>
 
               <form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -152,7 +168,11 @@ export function RegisterPage() {
                     <input
                       {...register("phone", {
                         required: "phone es obligatorio",
-                        maxLength: 20,
+                        maxLength: {
+                          value: 15,
+                          // pattern:"[0-9]{5}[-][0-9]{7}[-][0-9]{1}",
+                          message: "Ingreso mas de 15 caracteres"
+                        }
                       })}
                       type="phone"
                       name="phone"
@@ -172,7 +192,10 @@ export function RegisterPage() {
                     <input
                       {...register("password", {
                         required: "Contraseña es obligatoria",
-                        minLength: 6, /* TODO agregar mensaje de validacion password min6 */
+                        minLength:{
+                          value: 6,
+                          message: "Debe tener al menos 6 caracteres"
+                        } 
                       })}
                       type="password"
                       name="password"
@@ -212,9 +235,11 @@ export function RegisterPage() {
               <div className="mt-4 text-grey-600">
                 ¿Ya tienes una cuenta?{" "}
                 <span>
-                  <Link to={LOGIN_PAGE} className="text-purple-600 hover:underline">
+                  <Link
+                    to={LOGIN_PAGE}
+                    className="text-purple-600 hover:underline"
+                  >
                     {" "}
-                    
                     Inicia Sesión
                   </Link>
                 </span>

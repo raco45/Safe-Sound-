@@ -1,28 +1,19 @@
 import { useEffect, useState } from "react";
-import styles from "./HomePage.module.css";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
 import { Comment } from "../../components/Comment/Comment.jsx";
+import { useUsuarios } from "../../hooks/useUsuarios";
 
 export function HomePage() {
   const [showMore, setShowMore] = useState(false);
+  const { getValidatedDoctor, valDoctors, isLoading} = useUsuarios();
 
-  //Lista de ejemplo para probar los miniperfiles
-  const doctors = [
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-    <Miniperfil />,
-  ];
+
+  useEffect(() => {
+    getValidatedDoctor();
+
+  }, []);
 
   //activa o desactiva el estado de showMore
   const handleShowMore = () => {
@@ -30,7 +21,7 @@ export function HomePage() {
   };
 
   //numero que indica hasta que cantidad se corta la lista
-  const numList = showMore || doctors.length < 6 ? doctors.length : 6;
+  // const numList = showMore || doctors.length < 6 ? doctors.length : 6;
 
   return (
     <div className="flex flex-col justify-center items-center bg-[#FBE8FE]">
@@ -49,20 +40,34 @@ export function HomePage() {
           className="h-10 w-auto border-solid border-black border-2 bg-[#b990c0] cursor-pointer rounded-sm"
         />
       </div>
-
+      <div className="flex flex-col w-full items-center mb-4">
+        {isLoading && <h1 className="font-bold text-2xl">CARGANDO USUARIOS</h1>}
+        {!isLoading && (
+          <>
+            <div
+              className="border-2 border-solid rounded-xl grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
+              id="doctores_validados"
+            >
+              {valDoctors.map((doctor) => {
+                return (
+                  <Miniperfil user={doctor} idx={doctor.id} />
+                );
+              })}
+            </div> </>)}
+        </div>
       <div
         id="doctores"
         className="grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
       >
-        {doctors.length === 0 ? (
+        {/* {doctors.length === 0 ? (
           <h1 className="text-xl font-maintext font-bold"> 
             No se han encontrado resultados
           </h1>
         ) : (
           doctors.slice(0, numList).map((doctor) => {
-            return doctor;                              {/* mostrar los miniperfiles que haya disponibles */}
+            return doctor;                             
           })
-        )}
+        )} */}
       </div>
       <Button onClick={handleShowMore} disabled={false}>
         {showMore ? "Mostrar menos" : "Mostrar más"}
@@ -89,6 +94,8 @@ export function HomePage() {
         <Button disabled={false}>Enviar comentario</Button>
       </div>
       <br />
+  
+          
     </div>
   
   );
