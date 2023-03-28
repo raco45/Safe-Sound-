@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styles from "./HomePage.module.css";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
@@ -10,11 +9,11 @@ export function HomePage() {
   const [showMore, setShowMore] = useState(false);
   const { getValidatedDoctor, valDoctors, isLoading} = useUsuarios();
 
+
   useEffect(() => {
     getValidatedDoctor();
+
   }, []);
-
-
 
   //activa o desactiva el estado de showMore
   const handleShowMore = () => {
@@ -95,6 +94,8 @@ export function HomePage() {
         <Button disabled={false}>Enviar comentario</Button>
       </div>
       <br />
+  
+          
     </div>
   
   );
