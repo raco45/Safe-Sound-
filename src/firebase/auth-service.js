@@ -29,6 +29,7 @@ export const signInWithGoogle = async (useRol) => {
         role: useRol,
         description: "",
         country: "",
+        plans: [],
       });
     }
   } catch (error) {
@@ -64,7 +65,8 @@ export const registerWithEmailAndPassword = async (
   password,
   role,
   description = "",
-  country = ""
+  country = "",
+  plans=[],
 ) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -79,6 +81,7 @@ export const registerWithEmailAndPassword = async (
       role,
       description,
       country,
+      plans,
     });
     console.log("Registro exitoso", result);
   } catch (error) {

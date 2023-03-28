@@ -10,6 +10,7 @@ import { PaymentPage } from "./pages/PaymentPage/PaymentPage";
 import { ChatPage } from "./pages/ChatPage/ChatPage";
 import { DoctorProfilePage } from "./pages/DoctorProfilePage/DoctorProfilePage";
 import { DoctorCredentials } from "./pages/RegisterPage/DoctorCredentials";
+import { DoctorEdit } from "./pages/DoctorEdit/DoctorEdit"
 import Layout from "./components/Layout/Layout";
 import { PrivateRoute } from "./components/PrivateRoutes/PrivateRoute";
 import { UserContextProvider } from "../src/Contexts/UserContext";
@@ -22,6 +23,7 @@ import {
   CHAT_PAGE,
   DOCTOR_CREDENTIALS,
   PROFILE_PAGE_EDIT,
+  DOCTOR_EDIT,
   ADMIN_PAGE
 } from "./constants/url";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
