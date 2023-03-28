@@ -350,7 +350,7 @@ export function DoctorEdit() {
                                         name="description"
                                         id='plandescription'
                                         placeholder={
-                                            user.plansdescription ? user.plansdescription : "Ej: Plan de $15: cuenta con una cita individual..."
+                                            user.plansdescription ? user.plansdescription : "Ej: Plan de $15: es una cita de media hora..."
                                         }
                                         className="block w-full mt-1 pl-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2"
                                     />

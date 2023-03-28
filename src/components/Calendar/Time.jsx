@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Calendar from 'react-calendar';
 import React from 'react'
 
-const time = ['08:00','08:00','08:00', '09:00', '10:00', '14:00', '15:00']
+const time = ['08:00','09:00','10:00', '11:00', '13:00', '14:00', '15:00']
 
 export function Time(props) {
 
@@ -12,8 +12,10 @@ export function Time(props) {
     function displayInfo(e) {
         setInfo(true);
         setEvent(e.target.innerText);
+        
     }
 
+    
     
     return (
 

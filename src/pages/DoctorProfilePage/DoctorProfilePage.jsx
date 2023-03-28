@@ -7,16 +7,16 @@ import { Calendar } from 'react-calendar'
 //Aquí se define qué doctor mostrar en base a su id
 
 export function DoctorProfilePage() {
-  return (
-    <div> RECUERDA REESTABLECER LO DE PRIVATE ROUTE Y ESO ANTES DE SUBIR CALENDAR 
-    
-    <Calendarcomponent/>
 
+  return (
+    <div> 
+      <div className="md:flex">
+     
   
 
     <Button disabled={false}>Agendar cita!</Button>
 
-
+    </div>
     </div>
   )
 }
