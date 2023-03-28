@@ -65,7 +65,8 @@ export const registerWithEmailAndPassword = async (
   password,
   role,
   description = "",
-  country = ""
+  country = "",
+  plans=[],
 ) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
