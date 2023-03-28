@@ -1,26 +1,30 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "./config";
 
-export async function createInvoice(userId, data) {
-  return setDoc(doc(db, "userInvoices", userId), data);
-}
-
 export const registerInvoice = async (
+  user,
+  paymentId,
   patientName,
   therapistName,
-  selectedPlan,
   therapiesQuantity,
   therapyAmount,
   totalAmount
 ) => {
-  await createInvoice(result.user.uid, {
+  await createInvoice({
+    id: user.uid,
+    paymentId,
     patientName,
     therapistName,
-    selectedPlan,
     therapiesQuantity,
     therapyAmount,
     totalAmount,
   });
 };
+
+export async function createInvoice(data) {
+  return addDoc(collection(db, "userInvoices"), data);
+}
 
 export async function updateInvoice(userId, data) {
   const invoiceRef = doc(db, "userInvoices", userId);
