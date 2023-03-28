@@ -9,11 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@icon-park/react": "^1.4.2",
     "axios": "^1.3.4",
     "firebase": "^9.17.2",
+    "firebase-admin": "^11.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.1"
+    "react-hook-form": "^7.43.5",
+    "react-mixin": "^2.0.2",
+    "react-router-dom": "^6.9.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

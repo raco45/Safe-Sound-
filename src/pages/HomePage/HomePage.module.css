@@ -8,33 +8,4 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: #630e74;
-}
 
-.homepage{
-    text-align: center;
-    color:white;
-    margin: 100px ;
-    padding: 0 -50px;
-    border: solid black;
-    border-radius: 10px 10px ;
-}
-
-button{
-    background-color: rgb(243, 215, 149);
-    border-radius: 20%;
-    border: 0;
-    padding: 20px 20px;
-    margin: 20px;
-    cursor: pointer;
-}
-
-button:hover{
-    background-color: rgb(249, 237, 175);
-}
-
-.link{
-    color: rgb(132, 66, 158);
-    text-decoration: none;
-}

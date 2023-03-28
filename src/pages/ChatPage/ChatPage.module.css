@@ -1,0 +1,277 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@media screen and (max-width:480px){
+    
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+.main{
+    display: flex;
+    height: 89vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    border: 1px solid black;
+    
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+}
+.sidebar{
+    flex:1; 
+    border-right: 1px solid black;
+    background-color: #FFBFFF;
+    
+}
+.chat{flex: 2;}
+
+.boton1 {
+    height: 100%;
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid black;
+    background-color: #B990C0;
+    }
+.boton2{
+    border-left: 1px solid black;
+    height: 100%;
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+    background-color: #B990C0;
+}
+.prueba{
+    font-weight: 800;
+    color: #3E0576;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+.prueba:hover{
+    border-radius: 0;
+   background-color: #3E0576;
+   color: white;
+}
+
+.navbarchat{
+    height: 50px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userChat{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: black;
+    cursor:pointer;
+    background-color: #FBE8FE;
+    justify-content: space-between;
+}
+.userChatInfo{
+    display: flex;
+}
+.userChatName{
+    padding-left: 15px ;
+}
+img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+    
+    
+.userChat:hover{
+    background-color: #FFBFFF;
+}
+
+
+span{
+    font-size: 18px;
+    font-weight: 500;
+}
+p{
+    font-size: 14px;
+    color: #96789C;
+}
+
+.status {
+    background: rgb(0, 255, 0);
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+.statusOff{
+    background: rgba(247, 252, 255, 0.301);
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+    
+.chatInfo{
+    padding: 10px;
+    height: 50px;
+    background-color: #FFBFFF ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.userInfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.userName{
+    padding-right: 40px;
+}
+
+.messages{
+    padding: 10px;
+    height: calc(106% - 160px);
+    overflow-y: scroll;
+}
+
+.messageOwner{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    
+}
+.message{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-direction: row-reverse;
+}
+
+    
+.messageInfo{
+    display: flex;
+    flex-direction: column;
+    color: gray;
+    margin-bottom: 20px;
+}
+.messageInfo img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.messageContent{
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+.messageContent p{
+    background-color: white;
+    padding: 10px;
+    border-radius:  10px 0px 10px 10px;
+    max-width: max-content;
+}
+    
+    
+.messageContent img{
+    width: 50%;
+}
+
+.input{
+    
+    height: 70px;
+    background-color: #FFBFFF ;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input input{
+    
+    width: 100%;
+    height: 80%;
+    outline: none;
+    font-size: 18px;
+    color: black;
+    background-color: #FFBFFF ;
+}
+.input input::placeholder{
+    
+    color: black;
+}
+.enviar:hover{
+    cursor: pointer;
+}
+
+
+.send{
+    padding: 20px 20px ;
+    
+}
+
+.search {
+    border-bottom: 1px solid gray;
+
+}
+.searchForm {
+    padding: 10px;
+}
+.searchForm input {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+}
+
+.searchForm input::placeholder {
+    color: black;
+}
+
+  /* .userChat {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    cursor: pointer;
+  }
+    .userChat:hover {
+      background-color: #2f2d52;
+    } */
+
+   /* .userChat img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+.userChatInfo span {
+    font-size: 18px;
+    font-weight: 500;
+    }
+  .userChatInfo  p {
+    font-size: 14px;
+    color: lightgray;
+    } */
+
