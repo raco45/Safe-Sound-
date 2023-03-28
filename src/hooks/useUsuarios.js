@@ -5,6 +5,7 @@ import React, { useState } from "react";
 export function useUsuarios() {
   const [isLoading, setLoading] = useState(false);
   const [doctors, setDoctor] = useState([])
+  const [valDoctor, setValDoctor] = useState([])
   const [users, setUsers] = useState([])
 
   const getNotValidatedDoctor = async () => {
@@ -25,6 +26,29 @@ export function useUsuarios() {
     })
 
     setDoctor(docArr)
+
+    setLoading(false)
+    
+  };
+
+  const getValidatedDoctor = async () => {
+    setLoading(true)
+
+    const doctorQuery = query(
+      collection(db, "users"),
+      where("role", "==", "Doctor"),
+      where("validated", "==", true)
+    );
+
+    const results = await getDocs(doctorQuery);
+
+    const docArr = []
+    results.forEach(doc => {
+        docArr.push(doc.data())
+        
+    })
+
+    setValDoctor(docArr)
 
     setLoading(false)
     
@@ -53,5 +77,5 @@ export function useUsuarios() {
 
   
 
-  return {getNotValidatedDoctor, doctors, isLoading, users, getAllUsers};
+  return {getNotValidatedDoctor, doctors, isLoading, users, getAllUsers, valDoctor, getValidatedDoctor};
 }

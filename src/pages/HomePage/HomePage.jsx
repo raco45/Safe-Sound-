@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
-import styles from "./HomePage.module.css";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
 import { Comment } from "../../components/Comment/Comment.jsx";
+import { useUsuarios } from "../../hooks/useUsuarios";
 
 export function HomePage() {
-  const [showMore, setShowMore] = useState(false);
 
+  const [showMore, setShowMore] = useState(false);
+  const { getValidatedDoctor, valDoctor, isLoading} = useUsuarios();
+
+  useEffect(() => {
+    getValidatedDoctor();
+
+  }, []);
 
   //activa o desactiva el estado de showMore
   const handleShowMore = () => {
@@ -34,7 +40,23 @@ export function HomePage() {
           className="h-10 w-auto border-solid border-black border-2 bg-[#b990c0] cursor-pointer rounded-sm"
         />
       </div>
-
+      <div className="flex flex-col w-full items-center mb-4">
+        {isLoading && <h1 className="font-bold text-2xl">CARGANDO USUARIOS</h1>}
+        {!isLoading && (
+          <>
+            <div
+              className="border-2 border-solid border-black rounded-xl grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
+              id="doctores_validados"
+            >
+              {valDoctor.map((doctor) => {
+                return (
+                  <Miniperfil user={doctor} idx={doctor.id} />
+                );
+              })}
+            </div>
+            </>)}
+            </div>
+      
       <div
         id="doctores"
         className="grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
@@ -74,6 +96,8 @@ export function HomePage() {
         <Button disabled={false}>Enviar comentario</Button>
       </div>
       <br />
+  
+          
     </div>
   
   );

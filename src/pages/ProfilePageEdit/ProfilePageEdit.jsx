@@ -26,7 +26,7 @@ export function ProfilePageEdit() {
         phone: data.phone,
         country: data.country,
         description: data.description,
-        
+
       });
       //actualizar datos del user para actualizar la UI
       setUser({
@@ -36,7 +36,7 @@ export function ProfilePageEdit() {
         phone: data.phone,
         country: data.country,
         description: data.description,
-        
+
       });
       setLoading(false)
       navigate(PROFILE_PAGE);
@@ -49,7 +49,7 @@ export function ProfilePageEdit() {
     try {
       setLoading(true)
       const Userphoto = document.getElementById("photo")
-      
+
       //Subir foto a firestore y obtener el link de la misma
       const imgUrl = await uploadPhoto(Userphoto.files[0], Userphoto.files[0].name)
 
@@ -188,7 +188,6 @@ export function ProfilePageEdit() {
                     <p>{errors.description?.message}</p>
                   </div>
                 </div>
-
                 <div className="flex items-center mt-4">
                   <button
                     onClick={onsubmit}
