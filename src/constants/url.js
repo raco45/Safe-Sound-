@@ -5,7 +5,7 @@ export const PROFILE_PAGE = '/profile'
 export const PAYMENT_PAGE = '/check_out'
 export const CHAT_PAGE = '/chat'
 export const DOCTOR_CREDENTIALS = '/credentials'
-
+export const DOCTOR_EDIT = '/profile/doctoredit'
 export const PROFILE_PAGE_EDIT = '/profile/edit'
 
 
