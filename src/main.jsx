@@ -25,7 +25,8 @@ import {
   DOCTOR_CREDENTIALS,
   PROFILE_PAGE_EDIT,
   DOCTOR_EDIT,
-  ADMIN_PAGE
+  ADMIN_PAGE,
+  DOCTOR_PROFILE
 } from "./constants/url";
 import { ChatContextProvider } from "./Contexts/ChatContext";
 import { ProfilePageEdit } from "./pages/ProfilePageEdit/ProfilePageEdit";
@@ -48,9 +49,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path={PAYMENT_PAGE} element={<PrivateRoute><PaymentPage/></PrivateRoute>} />
           <Route path={CHAT_PAGE} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
           <Route path={DOCTOR_EDIT} element={<PrivateRoute><DoctorEdit /></PrivateRoute>}/>
-          <Route path="/doctor" element={<DoctorProfilePage />} />
           <Route path={ADMIN_PAGE} element={<PrivateRoute><AdminPage /></PrivateRoute>} />
-          <Route path="/doctors/:doctorId" element={<PrivateRoute><DoctorProfilePage /></PrivateRoute>} />
+          <Route path={DOCTOR_PROFILE} element={<PrivateRoute><DoctorProfilePage /></PrivateRoute>} />
           <Route path="*" element="404 NOT FOUND" />
           {/*Cuando se introduce una ruta que no existe*/}
         </Route>

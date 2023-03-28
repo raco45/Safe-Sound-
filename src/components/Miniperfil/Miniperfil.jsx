@@ -42,7 +42,7 @@ export function Miniperfil({ user, validateMode, idx, adminViewMode }) {
           {/*$:doctor.precio = bajo, y asi o por id*/}
         </div>
         <div className="flex-shrink-5 grid justify-items-center">
-          <Link to="#">
+          <Link to={`/doctor/${user.id}`}>
             <img
               className="w-44 h-auto"
               src={user.photoUrl}

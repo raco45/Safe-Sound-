@@ -1,4 +1,4 @@
-import { query, where, getDocs, collection } from "firebase/firestore";
+import { query, where, getDocs, collection, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import React, { useState } from "react";
 
@@ -7,6 +7,7 @@ export function useUsuarios() {
   const [doctors, setDoctor] = useState([])
   const [users, setUsers] = useState([])
   const [valDoctors, setValDoctors] = useState([])
+  const [singleDoctor, setSingleDoctor] = useState()
 
   const getNotValidatedDoctor = async () => {
     setLoading(true)
@@ -75,5 +76,19 @@ export function useUsuarios() {
     
   };
 
-  return {getNotValidatedDoctor, doctors, isLoading, users, getAllUsers, getValidatedDoctor, valDoctors};
+  const getSingleDoctor=async (doctorid) =>{
+    setLoading(true)
+    const doctorQuery = query(
+      collection(db, "users"),
+      where("id", "==", doctorid)
+    );
+    const result = await getDoc(doctorQuery)
+    // setSingleDoctor(result.data())
+    console.log(result.data())
+     
+    setLoading(false)
+
+  }
+
+  return {getNotValidatedDoctor, doctors, isLoading, users, getAllUsers, getValidatedDoctor, valDoctors, getSingleDoctor};
 }
