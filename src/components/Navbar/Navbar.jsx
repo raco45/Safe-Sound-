@@ -71,11 +71,7 @@ export function Navbar() {
           Chat
         </Link>
       </li>
-      <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
-        <Link to={PAYMENT_PAGE} className="text-xl" onClick={handlewindow} >
-          Paga
-        </Link>
-      </li>
+      
       <span className="font-semibold mx-4 text-xl flex items-center cursor-pointer hover:underline">
         <Link to={PROFILE_PAGE} className="pr-2" onClick={handlewindow}>
           {user.name}
