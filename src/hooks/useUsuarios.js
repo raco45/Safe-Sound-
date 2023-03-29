@@ -1,15 +1,23 @@
-import { query, where, getDocs, collection } from "firebase/firestore";
+import {
+  query,
+  where,
+  getDocs,
+  collection,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../firebase/config";
 import React, { useState } from "react";
 
 export function useUsuarios() {
   const [isLoading, setLoading] = useState(false);
-  const [doctors, setDoctor] = useState([])
-  const [users, setUsers] = useState([])
-  const [valDoctors, setValDoctors] = useState([])
+  const [doctors, setDoctor] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [valDoctors, setValDoctors] = useState([]);
+  const [singleDoctor, setSingleDoctor] = useState(null);
 
   const getNotValidatedDoctor = async () => {
-    setLoading(true)
+    setLoading(true);
 
     const doctorQuery = query(
       collection(db, "users"),
@@ -19,41 +27,35 @@ export function useUsuarios() {
 
     const results = await getDocs(doctorQuery);
 
-    const docArr = []
-    results.forEach(doc => {
-        docArr.push(doc.data())
-        
-    })
+    const docArr = [];
+    results.forEach((doc) => {
+      docArr.push(doc.data());
+    });
 
-    setDoctor(docArr)
+    setDoctor(docArr);
 
-    setLoading(false)
-    
+    setLoading(false);
   };
 
-  const getAllUsers = async () =>{
-    setLoading(true)
+  const getAllUsers = async () => {
+    setLoading(true);
 
-    const usersQuery = query(
-      collection(db, "users")
-    );
+    const usersQuery = query(collection(db, "users"));
 
     const results = await getDocs(usersQuery);
 
-    const userDocArr = []
-    results.forEach(doc => {
-      userDocArr.push(doc.data())
-        
-    })
+    const userDocArr = [];
+    results.forEach((doc) => {
+      userDocArr.push(doc.data());
+    });
 
-    setUsers(userDocArr)
+    setUsers(userDocArr);
 
-    setLoading(false)
-
-  }
+    setLoading(false);
+  };
 
   const getValidatedDoctor = async () => {
-    setLoading(true)
+    setLoading(true);
 
     const doctorQuery = query(
       collection(db, "users"),
@@ -63,17 +65,34 @@ export function useUsuarios() {
 
     const results = await getDocs(doctorQuery);
 
-    const docArr = []
-    results.forEach(doc => {
-        docArr.push(doc.data())
-        
-    })
+    const docArr = [];
+    results.forEach((doc) => {
+      docArr.push(doc.data());
+    });
 
-    setValDoctors(docArr)
+    setValDoctors(docArr);
 
-    setLoading(false)
-    
+    setLoading(false);
   };
 
-  return {getNotValidatedDoctor, doctors, isLoading, users, getAllUsers, getValidatedDoctor, valDoctors};
+  const getSingleDoctor = async (doctorid) => {
+    setLoading(true);
+    const doctorRef = doc(db, "users", doctorid);
+    const result = await getDoc(doctorRef);
+    setSingleDoctor(result.data());
+    console.log("ENTRA SINGLEDOCTOR");
+    setLoading(false);
+  };
+
+  return {
+    getNotValidatedDoctor,
+    doctors,
+    isLoading,
+    users,
+    getAllUsers,
+    getValidatedDoctor,
+    valDoctors,
+    getSingleDoctor,
+    singleDoctor,
+  };
 }

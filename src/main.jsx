@@ -24,7 +24,8 @@ import {
   DOCTOR_CREDENTIALS,
   PROFILE_PAGE_EDIT,
   DOCTOR_EDIT,
-  ADMIN_PAGE
+  ADMIN_PAGE,
+  DOCTOR_PROFILE
 } from "./constants/url";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { CLIENT_ID } from "./constants/paypal-info";
@@ -34,66 +35,36 @@ import {AdminPage} from "./pages/AdminPage/AdminPage";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <UserContextProvider>
-    <ChatContextProvider>
-      <React.StrictMode>
-        <PayPalScriptProvider
-          options={{
-            "client-id": CLIENT_ID,
-          }}
-        >
-          <BrowserRouter>
-            <Routes>
-              <Route element={<Layout />}>
-                <Route path={HOME_PAGE} element={<HomePage />} />
-                <Route path={LOGIN_PAGE} element={<LoginPage />} />
-                <Route path={REGISTER_PAGE} element={<RegisterPage />} />
-                <Route
-                  path={PROFILE_PAGE}
-                  element={
-                    <PrivateRoute>
-                      <UserProfilePage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path={PROFILE_PAGE_EDIT}
-                  element={
-                    <PrivateRoute>
-                      <ProfilePageEdit />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path={PAYMENT_PAGE}
-                  element={
-                    <PrivateRoute>
-                      <PaymentPage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path={CHAT_PAGE}
-                  element={
-                    <PrivateRoute>
-                      <ChatPage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/doctors/:doctorId"
-                  element={
-                    <PrivateRoute>
-                      <DoctorProfilePage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path="*" element="404 NOT FOUND" />
-                {/*Cuando se introduce una ruta que no existe*/}
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </PayPalScriptProvider>
-      </React.StrictMode>
-    </ChatContextProvider>
+
+  <ChatContextProvider>
+    
+  <React.StrictMode>
+  <PayPalScriptProvider
+  options={{
+    "client-id": CLIENT_ID,
+  }}
+>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path={HOME_PAGE} element={<HomePage />} />
+          <Route path={LOGIN_PAGE} element={<LoginPage />} />
+          <Route path={DOCTOR_CREDENTIALS} element={<DoctorCredentials />} />
+          <Route path={REGISTER_PAGE} element={<RegisterPage />} />
+          <Route path={PROFILE_PAGE} element={ <PrivateRoute><UserProfilePage /></PrivateRoute>} />
+          <Route path={PROFILE_PAGE_EDIT} element={<PrivateRoute><ProfilePageEdit /></PrivateRoute>} />
+          <Route path={PAYMENT_PAGE} element={<PrivateRoute><PaymentPage/></PrivateRoute>} />
+          <Route path={CHAT_PAGE} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
+          <Route path={DOCTOR_EDIT} element={<PrivateRoute><DoctorEdit /></PrivateRoute>}/>
+          <Route path={ADMIN_PAGE} element={<PrivateRoute><AdminPage /></PrivateRoute>} />
+          <Route path={DOCTOR_PROFILE} element={<DoctorProfilePage />} />
+          <Route path="*" element="404 NOT FOUND" />
+          {/*Cuando se introduce una ruta que no existe*/}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    </PayPalScriptProvider>
+  </React.StrictMode>
+  </ChatContextProvider>
   </UserContextProvider>
 );

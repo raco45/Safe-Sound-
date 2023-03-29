@@ -51,7 +51,7 @@ export function ProfilePageEdit() {
       const Userphoto = document.getElementById("photo")
 
       //Subir foto a firestore y obtener el link de la misma
-      const imgUrl = await uploadPhoto(Userphoto.files[0], Userphoto.files[0].name)
+      const imgUrl = await uploadPhoto(Userphoto.files[0], (Userphoto.files[0].name) + (new Date().valueOf()))
 
       // actualizar datos en firebase/firestore
       await updateUserProfile(user.id, {
