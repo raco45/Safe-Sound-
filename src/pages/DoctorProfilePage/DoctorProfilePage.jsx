@@ -79,13 +79,7 @@ export function DoctorProfilePage() {
     
 };
 
-const data1 ={
-  citaDate: {cita},
-  citaPlan: {planescogido},
-  terapistaid: singleDoctor && singleDoctor.id,
-  terapistaname: singleDoctor && singleDoctor.name,
-  terapistlastname: singleDoctor && singleDoctor.lastname,
-}
+
 
 const data1 = {
   citaPlan: planescogido,
