@@ -78,7 +78,7 @@ export function HomePage() {
         {!isLoading && searchMode && (
           <>
             <div
-              className="border-2 border-solid rounded-xl grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 bg-[#E4BCFC]"
+              className="border-2 border-solid rounded-xl grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6"
               id="doctores_validados"
             >
               {searchDoc.map((doctor) => {
