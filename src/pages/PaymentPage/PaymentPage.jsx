@@ -3,6 +3,7 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import { registerInvoice } from "../../firebase/paypal-service";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+
 export function PaymentPage() {
   const [patientName, setPatientName] = useState("Finn");
   const [therapistName, setTherapistName] = useState("Pedro");
