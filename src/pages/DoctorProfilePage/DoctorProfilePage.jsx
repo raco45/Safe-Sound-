@@ -26,9 +26,9 @@ export function DoctorProfilePage() {
   const month = date.toLocaleString('default', { month: '2-digit' })
   const day = date.toLocaleString('default', { day: '2-digit' })
   const tomorrow = year + '-' + month + '-' + day
-  console.log(tomorrow)
+  
   const minDate = tomorrow + 'T08:00'
-  console.log(minDate)
+  
 
   useEffect(() => {
     if (!isLoading && doctorid) {
@@ -72,7 +72,7 @@ export function DoctorProfilePage() {
                 [combinedId+".date"]: serverTimestamp()
             });
         }
-    console.log(singleDoctor);
+    
     }catch(err){
 
     }
@@ -83,10 +83,7 @@ export function DoctorProfilePage() {
 
 
   
-  console.log(citaSplit);
-
-  console.log("cita" + cita);
-  console.log(singleDoctor);
+  
 
   return (
     <div>

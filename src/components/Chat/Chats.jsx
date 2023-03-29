@@ -6,13 +6,21 @@ import { doc, onSnapshot, serverTimestamp, Timestamp } from '@firebase/firestore
 import {db} from "../../firebase/config"
 import { ChatContext, useChat } from '../../Contexts/ChatContext';
 import { Time } from '@icon-park/react';
+import { number } from 'prop-types';
 export default function Chats() {
   const [chats, setChats]=useState([])
   const {user}=useUser();
   const {dispatch, currentUser}=useChat();
   const [estadoBoton, setEstadoBoton]=useState(1);
-  let myDate= new Date(); 
-  let fecha=myDate.getFullYear().toString()+"-"+ myDate.getMonth().toString()+"-"+myDate.getDate().toString();
+  // let myDate= new Date(); 
+  // let fecha=myDate.getFullYear().toString()+"-"+ myDate.getMonth().toString()+"-"+myDate.getDate().toString();
+  let date = new Date()
+  date.setDate(date.getDate() );
+  const year = date.toLocaleString('default', { year: 'numeric' })
+  const month = date.toLocaleString('default', { month: '2-digit' })
+  const day = date.toLocaleString('default', { day: '2-digit' })
+  const tomorrow = year + '-' + month + '-' + day;
+  
   const handleBoton1 =()=>{
     setEstadoBoton(1);
   };
@@ -35,12 +43,13 @@ export default function Chats() {
   const handleSelect= (u)=>{
     dispatch({type:"CHANGE_USER",payload:u});
   }
-  console.log(fecha);
-  console.log(estadoBoton);
-  console.log(Object.entries(chats));
-
-  let prueba= "14:04";
   
+  // let prueba= "14:04";
+  // console.log(Number(prueba.split(":")[1]));  
+  // console.log(tomorrow);
+  // console.log(estadoBoton);
+  // console.log(Object.entries(chats));
+  // console.log(date.getHours());
 
   return (
     <div className={styles.chats}>
@@ -62,10 +71,11 @@ export default function Chats() {
             <p>{chat[1].lastMessage?.text}</p>
           </div>
         </div>
-          <div className={styles.status}></div>
+          <div className={styles.statusOff}></div>
       </div>
         )):  Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat)=>(
-            chat[1].userInfo.fechaCita=== fecha ?( 
+            
+            Number(chat[1].userInfo.fechaCita[1].split(":")[0]) === date.getHours() &&  chat[1].userInfo.fechaCita[0]===tomorrow && Number(chat[1].userInfo.fechaCita[1].split(":")[0])<(date.getHours()+1) ?( 
 
               <div className={styles.userChat} key={chat[0]} onClick={()=>handleSelect(chat[1].userInfo)} >
           <div className={styles.userChatInfo}>

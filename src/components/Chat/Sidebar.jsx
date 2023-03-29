@@ -8,7 +8,7 @@ function Sidebar() {
   return (
     <div className={styles.sidebar}>
         {/* <NavbarChat/> */}
-        <Search/>
+        
         <Chats/>
         
         </div>

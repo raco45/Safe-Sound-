@@ -18,11 +18,11 @@ export default function Chat() {
 
 
 
-  console.log(data);
+  
   return (
     <div className={styles.chat}> 
       <div className={styles.chatInfo}>
-          <div className={styles.status}></div>
+          <div className={styles.statusOff}></div>
         <div className={styles.userInfo}>
            <span className={styles.userName}> {data.userCon?.displayName}</span>
            {currentUser ? (<img src={currentUser.photoUrl}/>) : (<img src={user}/>) }
