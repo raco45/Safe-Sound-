@@ -12,7 +12,7 @@ export default function Chats() {
   const {dispatch, currentUser}=useChat();
   const [estadoBoton, setEstadoBoton]=useState(1);
   let myDate= new Date(); 
-  let fecha= myDate.getDate().toString() +" "+ myDate.getMonth().toString()+" "+myDate.getFullYear().toString();
+  let fecha=myDate.getFullYear().toString()+"-"+ myDate.getMonth().toString()+"-"+myDate.getDate().toString();
   const handleBoton1 =()=>{
     setEstadoBoton(1);
   };
@@ -35,8 +35,13 @@ export default function Chats() {
   const handleSelect= (u)=>{
     dispatch({type:"CHANGE_USER",payload:u});
   }
+  console.log(fecha);
   console.log(estadoBoton);
   console.log(Object.entries(chats));
+
+  let prueba= "14:04";
+  
+
   return (
     <div className={styles.chats}>
       <div className={styles.navbarchat}>

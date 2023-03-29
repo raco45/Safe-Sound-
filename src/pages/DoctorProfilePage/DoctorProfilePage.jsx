@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useUsuarios } from "../../hooks/useUsuarios";
 import { useParams } from "react-router";
 import { Navigate } from "react-router";
+import { Link } from "react-router-dom";
+import { PAYMENT_PAGE } from "../../constants/url";
+import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "@firebase/firestore";
+import { db } from "../../firebase/config";
+import { useUser } from "../../Contexts/UserContext";
 //Aquí se define qué doctor mostrar en base a su id
 
 export function DoctorProfilePage() {
@@ -9,7 +14,7 @@ export function DoctorProfilePage() {
   const { getSingleDoctor, isLoading, singleDoctor } = useUsuarios();
   const [cita, setCita] = useState("")
   const [planescogido, setPlanescogido] = useState("")
-
+  const {user}= useUser();
   const currentTime = new Date().toLocaleTimeString('en-US', {
     hour12: false,
   });
@@ -30,8 +35,58 @@ export function DoctorProfilePage() {
       getSingleDoctor(doctorid);
     }
   }, []);
-  console.log("cita" + cita);
 
+  let citaSplit= cita.replace("T"," ").split(" ");
+  const handleSelect= async ()=>{
+    //Check whether the group(chats in firestore)exists, if not create
+    const combinedId= user.id>singleDoctor.id
+     ?  user.id + singleDoctor.id 
+     :singleDoctor.id +user.id; 
+    
+    try{
+        
+        const res = await getDoc(doc(db, "chats", combinedId));
+        if (!res.exists()){
+            
+            // Create a chat in chats collection
+            await setDoc(doc(db,"chats",combinedId),{messages:[]})
+            //Create user chats 
+            await updateDoc(doc(db, "userChats",user.id),
+            {
+                [combinedId+".userInfo"]:{
+                    fechaCita: citaSplit,
+                    id: singleDoctor.id,
+                    displayName: singleDoctor.name,
+                    photoUrl: singleDoctor.photoUrl,
+                },
+                [combinedId+".date"]: serverTimestamp()
+            });
+            await updateDoc(doc(db, "userChats",singleDoctor.id),
+            {
+                [combinedId+".userInfo"]:{
+                    fechaCita: citaSplit,
+                    id: user.id,
+                    displayName: user.name,
+                    photoUrl: user.photoUrl,
+                },
+                [combinedId+".date"]: serverTimestamp()
+            });
+        }
+    console.log(singleDoctor);
+    }catch(err){
+
+    }
+    
+};
+
+
+
+
+  
+  console.log(citaSplit);
+
+  console.log("cita" + cita);
+  console.log(singleDoctor);
 
   return (
     <div>
@@ -101,7 +156,13 @@ export function DoctorProfilePage() {
 
                 </div>
                 <div>
-                  <button className="bg-[#ede3ef] shadow-sm text-xl text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 ml-0 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]">Agendar</button>
+                  <Link to={planescogido!=""&& cita!="" && PAYMENT_PAGE}> 
+                    <button className="bg-[#ede3ef] shadow-sm text-xl text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 ml-0 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]"
+                      onClick={(planescogido!=""&& cita!="")?handleSelect: "" }
+                    >
+                      Agendar
+                    </button>
+                  </Link>
                 </div>
                 </div>
                 </div>
