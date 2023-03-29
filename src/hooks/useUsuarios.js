@@ -15,6 +15,7 @@ export function useUsuarios() {
   const [users, setUsers] = useState([]);
   const [valDoctors, setValDoctors] = useState([]);
   const [singleDoctor, setSingleDoctor] = useState(null);
+  const [searchDoc, setSearchDoc] = useState([])
 
   const getNotValidatedDoctor = async () => {
     setLoading(true);
@@ -80,9 +81,34 @@ export function useUsuarios() {
     const doctorRef = doc(db, "users", doctorid);
     const result = await getDoc(doctorRef);
     setSingleDoctor(result.data());
-    console.log("ENTRA SINGLEDOCTOR");
+    
     setLoading(false);
   };
+
+  const getDoctorByParam = async (optionParam, inputValue) =>{
+    setLoading(true)
+
+    console.log(optionParam, "optionParam")
+    console.log(inputValue, "inputValue")
+    
+      const doctorQuery = query(
+        collection(db, "users"),
+        where("validated", "==", true),
+        where(optionParam, "==", inputValue),
+      );
+
+    const results = await getDocs(doctorQuery);
+
+    const docArr = [];
+    results.forEach((doc) => {
+      docArr.push(doc.data());
+    });
+
+    setSearchDoc(docArr);
+
+    setLoading(false);
+
+  }
 
   return {
     getNotValidatedDoctor,
@@ -94,5 +120,7 @@ export function useUsuarios() {
     valDoctors,
     getSingleDoctor,
     singleDoctor,
+    searchDoc,
+    getDoctorByParam,
   };
 }

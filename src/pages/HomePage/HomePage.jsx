@@ -6,74 +6,92 @@ import { Comment } from "../../components/Comment/Comment.jsx";
 import { useUsuarios } from "../../hooks/useUsuarios";
 
 export function HomePage() {
-  const [showMore, setShowMore] = useState(false);
-  const { getValidatedDoctor, valDoctors, isLoading} = useUsuarios();
-
+  const [searchMode, setSearchMode] = useState(false);
+  const [campo, setCampo] = useState(null);
+  const inputValue = document.getElementById("searchbar");
+  const {
+    getValidatedDoctor,
+    valDoctors,
+    isLoading,
+    searchDoc,
+    getDoctorByParam,
+  } = useUsuarios();
 
   useEffect(() => {
     getValidatedDoctor();
 
+    if (inputValue?.value == null) {
+     
+    }else{
+      
+      getDoctorByParam(campo, inputValue.value);
+    }
   }, []);
 
-  
-  
-  //activa o desactiva el estado de showMore
-  const handleShowMore = () => {
-    setShowMore(!showMore);
+  const handleSearch = async () => {
+    setSearchMode(true);
+    if (inputValue?.value == null) {
+   
+    }else{
+      
+      getDoctorByParam(campo, inputValue.value);
+    }
   };
-
-  //numero que indica hasta que cantidad se corta la lista
-  // const numList = showMore || doctors.length < 6 ? doctors.length : 6;
 
   return (
     <div className="flex flex-col justify-center items-center bg-[#FBE8FE]">
       <div className="md:w-5/6 mt-10 mb-6 flex">
         <input
           placeholder="Escriba aquí..."
+          id="searchbar"
           className="h-10  md:w-1/2 border-solid border-black border-2 rounded-sm pl-2"
         />
-        <select className="border-solid border-black border-2 bg-[#e5c9ea] font-semibold font-maintext">
-          <option value="Nombre">Nombre</option>
-          <option value="Especialidad">Especialidad</option>
-          <option value="Rango precio">Precio</option>
+        <select
+          id="select-campo"
+          className="border-solid border-black border-2 bg-[#e5c9ea] font-semibold font-maintext"
+          onChange={(e) => setCampo(e.target.value)}
+          
+        >
+          <option value="choose">Elegir</option>
+          <option value="name">Nombre</option>
+          <option value="specialties">Especialidad</option>
+          <option value="range">Precio</option>
         </select>
+        
         <img
           src="src\assets\lupa.png"
           className="h-10 w-auto border-solid border-black border-2 bg-[#b990c0] cursor-pointer rounded-sm"
+          onClick={handleSearch}
         />
       </div>
       <div className="flex flex-col w-full items-center mb-4">
         {isLoading && <h1 className="font-bold text-2xl">CARGANDO USUARIOS</h1>}
-        {!isLoading && (
+        {!isLoading && !searchMode && (
           <>
             <div
               className="border-2 border-solid rounded-xl grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
               id="doctores_validados"
             >
               {valDoctors.map((doctor) => {
-                return (
-                  <Miniperfil user={doctor} idx={doctor.id} />
-                );
+                return <Miniperfil user={doctor} idx={doctor.id} />;
               })}
-            </div> </>)}
-        </div>
-      <div
-        id="doctores"
-        className="grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
-      >
-        {/* {doctors.length === 0 ? (
-          <h1 className="text-xl font-maintext font-bold"> 
-            No se han encontrado resultados
-          </h1>
-        ) : (
-          doctors.slice(0, numList).map((doctor) => {
-            return doctor;                             
-          })
-        )} */}
+            </div>{" "}
+          </>
+        )}
+        {!isLoading && searchMode && (
+          <>
+            <div
+              className="border-2 border-solid rounded-xl grid grid-cols-1  md:grid-cols-3 md:justify-screen p-5 md:w-5/6 "
+              id="doctores_validados"
+            >
+              {searchDoc.map((doctor) => {
+                return <Miniperfil user={doctor} idx={doctor.id} />;
+              })}
+            </div>{" "}
+          </>
+        )}
       </div>
-      <Button onClick={handleShowMore} disabled={false}>
-        {showMore ? "Mostrar menos" : "Mostrar más"}
-      </Button>
+
       <div
         id="user-comments"
         className="w-full m-10 flex flex-col justify-center items-center"
@@ -96,9 +114,6 @@ export function HomePage() {
         <Button disabled={false}>Enviar comentario</Button>
       </div>
       <br />
-  
-          
     </div>
-  
   );
 }
