@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useUsuarios } from "../../hooks/useUsuarios";
 import { useParams } from "react-router";
-
+import { Navigate } from "react-router";
 //Aquí se define qué doctor mostrar en base a su id
 
 export function DoctorProfilePage() {
