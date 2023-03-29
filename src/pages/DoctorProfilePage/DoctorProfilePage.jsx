@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useUsuarios } from "../../hooks/useUsuarios";
 import { useParams } from "react-router";
 
@@ -13,6 +13,8 @@ export function DoctorProfilePage() {
     hour: "numeric",
     minute: "numeric",
   });
+  const [numcita, setNumcita] = useState(0); 
+
   useEffect(() => {
     if (!isLoading && doctorid) {
       getSingleDoctor(doctorid);
@@ -64,7 +66,7 @@ export function DoctorProfilePage() {
             <br />
             <div>
               <label>Escoge un plan </label>
-              <select>
+              <select className="bg-[#ede3ef] shadow-sm  text-[#a063a8] border-[#a063a8] border-2 rounded-lg">
                 {singleDoctor &&
                   singleDoctor.plans.map((plan) => {
                     return <option value={plan}>Plan: {plan}</option>;
@@ -73,7 +75,12 @@ export function DoctorProfilePage() {
             </div>
             <br />
             <div>
-              <input type="datetime-local" min={today+currentTime} />
+              <input className="bg-[#ede3ef] shadow-sm " type="datetime-local" min={today+currentTime} />
+              <button className="bg-[#ede3ef] shadow-sm  text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]" onClick={() => {setNumcita(numcita + 1);}}>Agregar cita: {numcita}</button>
+              <button className="bg-[#ede3ef] shadow-sm  text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 ml-0 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]" onClick={() => {setNumcita(0);}}>Borrar citas</button>
+            </div>
+            <div>
+            <button className="bg-[#ede3ef] shadow-sm text-xl text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 ml-0 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]">Agendar</button>
             </div>
           </div>
         </div>
