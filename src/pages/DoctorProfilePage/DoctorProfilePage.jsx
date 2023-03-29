@@ -164,6 +164,7 @@ console.log(data1)
                 <div>
                   <Link to={planescogido!=""&& cita!="" && PAYMENT_PAGE} state={data1} > 
                     <button className="bg-[#ede3ef] shadow-sm text-xl text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 ml-0 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]"
+                      disabled={user.role==="Doctor"?true:false}
                       onClick={(planescogido!=""&& cita!="")?handleSelect: "" }
                     >
                       Agendar
