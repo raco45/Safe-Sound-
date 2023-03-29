@@ -13,7 +13,7 @@ export function DoctorProfilePage() {
   const { doctorid } = useParams();
   const { getSingleDoctor, isLoading, singleDoctor } = useUsuarios();
   const [cita, setCita] = useState("")
-  const [planescogido, setPlanescogido] = useState("")
+  const [planescogido, setPlanescogido] = useState('');
   const {user}= useUser();
   const currentTime = new Date().toLocaleTimeString('en-US', {
     hour12: false,
@@ -26,9 +26,8 @@ export function DoctorProfilePage() {
   const month = date.toLocaleString('default', { month: '2-digit' })
   const day = date.toLocaleString('default', { day: '2-digit' })
   const tomorrow = year + '-' + month + '-' + day
-  console.log(tomorrow)
   const minDate = tomorrow + 'T08:00'
-  console.log(minDate)
+
 
   useEffect(() => {
     if (!isLoading && doctorid) {
@@ -80,13 +79,12 @@ export function DoctorProfilePage() {
 };
 
 
-
+const data1 = {
+  citaPlan: planescogido,
+  terapista: singleDoctor && singleDoctor.name,
+}
 
   
-  console.log(citaSplit);
-
-  console.log("cita" + cita);
-  console.log(singleDoctor);
 
   return (
     <div>
@@ -156,7 +154,7 @@ export function DoctorProfilePage() {
 
                 </div>
                 <div>
-                  <Link to={planescogido!=""&& cita!="" && PAYMENT_PAGE}> 
+                  <Link to={planescogido!=""&& cita!="" && PAYMENT_PAGE} state={data1}> 
                     <button className="bg-[#ede3ef] shadow-sm text-xl text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 ml-0 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]"
                       onClick={(planescogido!=""&& cita!="")?handleSelect: "" }
                     >

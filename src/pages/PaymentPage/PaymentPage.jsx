@@ -3,13 +3,16 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import { registerInvoice } from "../../firebase/paypal-service";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useUser } from "../../Contexts/UserContext";
+import { Link, useLocation } from "react-router-dom";
 
 export function PaymentPage() {
-  const [therapistName, setTherapistName] = useState("Pedro");
-  const [therapyAmount, setTherapyAmount] = useState(9);
-  const [totalAmount, setTotalAmount] = useState(
-    5 * therapyAmount
-  );
+  const location = useLocation();
+  const myData = location.state;
+  const [therapistName, setTherapistName] = useState(myData.terapista);
+  const [therapyAmount, setTherapyAmount] = useState(myData.citaPlan);
+  const [totalAmount, setTotalAmount] = useState(therapyAmount);
+
+  
 
   const {user} = useUser();
 
@@ -56,7 +59,7 @@ export function PaymentPage() {
               <div className="mb-4 font-bold">
                 <h1 className="mb-1">{user.name}</h1>
                 <h1 className="mb-1">{therapistName}</h1>
-                <h1 className="mb-4">${therapyAmount}</h1>
+                <h1 className="mb-1">${therapyAmount}</h1>
                 <h1 className="mb-4">${totalAmount}</h1>
               </div>
             </div>
