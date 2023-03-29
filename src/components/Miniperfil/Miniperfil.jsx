@@ -34,12 +34,7 @@ export function Miniperfil({ user, validateMode, idx, adminViewMode }) {
           <div className="col-span-2 p-2 fonttext-xl text-black font-maintext font-bold">
             {user.name} {user.lastname}
           </div>
-          <img
-            className="w-10 h-auto"
-            src="src\assets\user.png"
-            alt={user.name}
-          />{" "}
-          {/*$:doctor.precio = bajo, y asi o por id*/}
+            <h1 className="bg-[#ceafd3] border-2 border-[#f1e8f3] pl-2 w-12 pr-2 rounded-md" >{user.range}</h1>
         </div>
         <div className="flex-shrink-5 grid justify-items-center">
           <Link to={`/doctor/${user.id}`}>
