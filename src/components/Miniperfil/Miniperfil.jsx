@@ -4,7 +4,7 @@ import styles from "./index.module.css";
 import { DOCTOR_PROFILE } from '../../constants/url';import { Button } from "../Button/Button";
 import { updateUserProfile, deleteUserProfile } from "../../firebase/users-service";
 
-export function Miniperfil({ user, validateMode, idx, adminViewMode }) {
+export function Miniperfil({ user, validateMode, idx, adminViewMode, currentuser }) {
 
 
   const handleValidate = async () => {
@@ -37,7 +37,7 @@ export function Miniperfil({ user, validateMode, idx, adminViewMode }) {
             <h1 className="bg-[#ceafd3] border-2 border-[#f1e8f3] pl-2 w-12 pr-2 rounded-md" >{user.range}</h1>
         </div>
         <div className="flex-shrink-5 grid justify-items-center">
-          <Link to={`/doctor/${user.id}`}>
+          <Link to={currentuser && `/doctor/${user.id}`}>
             <img
               className="w-44 h-auto"
               src={user.photoUrl}

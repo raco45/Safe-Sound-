@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { Miniperfil } from "../../components/MiniPerfil/MiniPerfil";
 import { Comment } from "../../components/Comment/Comment.jsx";
 import { useUsuarios } from "../../hooks/useUsuarios";
+import { useUser } from "../../Contexts/UserContext";
 
 export function HomePage() {
   const [searchMode, setSearchMode] = useState(false);
   const [campo, setCampo] = useState(null);
   const inputValue = document.getElementById("searchbar");
+  const {user}= useUser();
   const {
     getValidatedDoctor,
     valDoctors,
@@ -70,7 +72,7 @@ export function HomePage() {
               id="doctores_validados"
             >
               {valDoctors.map((doctor) => {
-                return <Miniperfil user={doctor} idx={doctor.id} />;
+                return <Miniperfil user={doctor} idx={doctor.id} currentuser={user}/>;
               })}
             </div>{" "}
           </>
@@ -82,7 +84,7 @@ export function HomePage() {
               id="doctores_validados"
             >
               {searchDoc.map((doctor) => {
-                return <Miniperfil user={doctor} idx={doctor.id} />;
+                return <Miniperfil user={doctor} idx={doctor.id} currentuser={user} />;
               })}
             </div>{" "}
           </>
