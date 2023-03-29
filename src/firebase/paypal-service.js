@@ -1,24 +1,23 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { useUser } from "../Contexts/UserContext";
 import { db } from "./config";
 
 export const registerInvoice = async (
-  user,
+  userid,
   paymentId,
   patientName,
   therapistName,
-  therapiesQuantity,
   therapyAmount,
   totalAmount
 ) => {
   await createInvoice({
-    id: user.uid,
-    paymentId,
-    patientName,
-    therapistName,
-    therapiesQuantity,
-    therapyAmount,
-    totalAmount,
+    id: userid,
+    pagoId: paymentId,
+    nombrePaciente: patientName,
+    nombreTerapista: therapistName,
+    precioTerapia: therapyAmount,
+    precioTotal: totalAmount,
   });
 };
 
