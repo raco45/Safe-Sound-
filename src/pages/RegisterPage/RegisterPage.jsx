@@ -267,17 +267,7 @@ export function RegisterPage() {
                   </p>
                 </button>
 
-                <button
-                  role="button"
-                  className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400 bg-[#E4BCFC]"
-                >
-                  <img
-                    src="https://www.svgrepo.com/show/475647/facebook-color.svg"
-                    viewBox="0 0 32 32"
-                    className="w-5 h-5 fill-current"
-                  />
-                  <p>Iniciar sesión con Facebook</p>
-                </button>
+                
               </div>
             </div>
           </div>
