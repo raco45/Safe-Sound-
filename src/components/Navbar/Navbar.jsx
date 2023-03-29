@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CHAT_PAGE, PROFILE_PAGE, HOME_PAGE, LOGIN_PAGE, REGISTER_PAGE } from "../../constants/url";
+import { CHAT_PAGE, PROFILE_PAGE, HOME_PAGE, LOGIN_PAGE, REGISTER_PAGE, PAYMENT_PAGE } from "../../constants/url";
 import { useUser } from "../../Contexts/UserContext";
 import { logout } from "../../firebase/auth-service";
 
@@ -69,6 +69,11 @@ export function Navbar() {
       <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
         <Link to={CHAT_PAGE} className="text-xl" onClick={handlewindow}>
           Chat
+        </Link>
+      </li>
+      <li className="font-semibold hover:underline mx-4 my-6 md:my-0">
+        <Link to={PAYMENT_PAGE} className="text-xl" onClick={handlewindow} >
+          Paga
         </Link>
       </li>
       <span className="font-semibold mx-4 text-xl flex items-center cursor-pointer hover:underline">

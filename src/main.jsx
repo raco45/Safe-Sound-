@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import"./index.css";
+import "./index.css";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
@@ -12,9 +12,8 @@ import { DoctorProfilePage } from "./pages/DoctorProfilePage/DoctorProfilePage";
 import { DoctorCredentials } from "./pages/RegisterPage/DoctorCredentials";
 import { DoctorEdit } from "./pages/DoctorEdit/DoctorEdit"
 import Layout from "./components/Layout/Layout";
-import {PrivateRoute} from './components/PrivateRoutes/PrivateRoute'
-import { UserContextProvider } from '../src/Contexts/UserContext'
-
+import { PrivateRoute } from "./components/PrivateRoutes/PrivateRoute";
+import { UserContextProvider } from "../src/Contexts/UserContext";
 import {
   HOME_PAGE,
   LOGIN_PAGE,
@@ -28,6 +27,8 @@ import {
   ADMIN_PAGE,
   DOCTOR_PROFILE
 } from "./constants/url";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { CLIENT_ID } from "./constants/paypal-info";
 import { ChatContextProvider } from "./Contexts/ChatContext";
 import { ProfilePageEdit } from "./pages/ProfilePageEdit/ProfilePageEdit";
 import {AdminPage} from "./pages/AdminPage/AdminPage";
@@ -38,6 +39,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ChatContextProvider>
     
   <React.StrictMode>
+  <PayPalScriptProvider
+  options={{
+    "client-id": CLIENT_ID,
+  }}
+>
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
@@ -57,6 +63,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </Route>
       </Routes>
     </BrowserRouter>
+    </PayPalScriptProvider>
   </React.StrictMode>
   </ChatContextProvider>
   </UserContextProvider>
