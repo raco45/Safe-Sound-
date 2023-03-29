@@ -60,7 +60,7 @@ export function PaymentPage() {
               <div className="mb-4 font-bold">
                 <h1 className="mb-1">{user.name}</h1>
                 <h1 className="mb-1">{therapistName}</h1>
-                <h1 className="mb-1">${therapyAmount}</h1>
+                <h1 className="mb-4">${therapyAmount}</h1>
                 <h1 className="mb-4">${totalAmount}</h1>
               </div>
             </div>
@@ -82,14 +82,6 @@ export function PaymentPage() {
                 });
               }}
               onApprove={async (data, actions) => {
-                const details = await actions.order.capture();
-                console.log(details, "details");
-                console.log(user, "user");
-                console.log(data.orderID, "orderID");
-                console.log(user.name, "name");
-                console.log(therapistName, "therapist");
-                console.log(therapyAmount, "therapyAmount");
-                console.log(totalAmount, "total");
                 handleApprove(
                   user.id,
                   data.orderID,
@@ -98,8 +90,6 @@ export function PaymentPage() {
                   therapyAmount,
                   totalAmount
                 );
-                const name = details.payer.name.given_name;
-                alert("Transaction completed by " + name);
               }}
             />
           </div>
