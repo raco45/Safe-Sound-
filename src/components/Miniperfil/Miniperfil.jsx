@@ -50,9 +50,6 @@ export function Miniperfil({ user, validateMode, idx, adminViewMode }) {
             <div className="text-black flex font-maintext ">
               Especialidades: {user.specialties}
             </div>
-            <div className="ml-60 w-12 grid justify-items-center rounded-xl font-maintext text-black bg-[#fbe8fe] pb-1">
-              x/10
-            </div>
           </>
         )}
 
