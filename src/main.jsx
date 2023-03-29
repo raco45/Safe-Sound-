@@ -50,7 +50,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path={CHAT_PAGE} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
           <Route path={DOCTOR_EDIT} element={<PrivateRoute><DoctorEdit /></PrivateRoute>}/>
           <Route path={ADMIN_PAGE} element={<PrivateRoute><AdminPage /></PrivateRoute>} />
-          <Route path={DOCTOR_PROFILE} element={<PrivateRoute><DoctorProfilePage /></PrivateRoute>} />
+          <Route path={DOCTOR_PROFILE} element={<DoctorProfilePage />} />
           <Route path="*" element="404 NOT FOUND" />
           {/*Cuando se introduce una ruta que no existe*/}
         </Route>

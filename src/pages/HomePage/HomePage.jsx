@@ -15,6 +15,8 @@ export function HomePage() {
 
   }, []);
 
+  
+  
   //activa o desactiva el estado de showMore
   const handleShowMore = () => {
     setShowMore(!showMore);
