@@ -7,24 +7,36 @@ import { useParams } from "react-router";
 export function DoctorProfilePage() {
   const { doctorid } = useParams();
   const { getSingleDoctor, isLoading, singleDoctor } = useUsuarios();
-  const today = new Date().toLocaleDateString();
-  const currentTime = new Date().toLocaleTimeString({
+  const [cita, setCita] = useState("")
+  const [planescogido, setPlanescogido] = useState("")
+ 
+  const currentTime = new Date().toLocaleTimeString( 'en-US',{
     hour12: false,
-    hour: "numeric",
-    minute: "numeric",
   });
-  const [numcita, setNumcita] = useState(0); 
+
+  const today = new Date()
+  let date = new Date()
+  date.setDate(today.getDate()+1)
+  const year = date.toLocaleString('default',{year:'numeric'})
+  const month = date.toLocaleString('default',{month:'2-digit'})
+  const day = date.toLocaleString('default',{day:'2-digit'})
+  const tomorrow = year + '-'+month+'-'+day
+  console.log(tomorrow)
+  const minDate = tomorrow+'T08:00'
+  console.log(minDate)
 
   useEffect(() => {
     if (!isLoading && doctorid) {
       getSingleDoctor(doctorid);
     }
   }, []);
+  console.log("cita"+ cita);
+
   
   return (
     <div>
       <div className="flex items-center  m-10">
-        <div className="bg-[#b990c0] shadow-sm shadow-gray-500 rounded-md w-1/3 p-10 h-auto">
+        <div className="bg-[#b990c0]  shadow-sm shadow-gray-500 rounded-md w-1/3 p-10 h-auto">
           <div className="flex flex-col items-center justify-center mb-2">
             <img
               src={singleDoctor && singleDoctor.photoUrl}
@@ -66,7 +78,7 @@ export function DoctorProfilePage() {
             <br />
             <div>
               <label>Escoge un plan </label>
-              <select className="bg-[#ede3ef] shadow-sm  text-[#a063a8] border-[#a063a8] border-2 rounded-lg">
+              <select className="bg-[#ede3ef] shadow-sm  text-[#a063a8] border-[#a063a8] border-2 rounded-lg" onChange={e=>setPlanescogido(e.target.value)}>
                 {singleDoctor &&
                   singleDoctor.plans.map((plan) => {
                     return <option value={plan}>Plan: {plan}</option>;
@@ -75,9 +87,9 @@ export function DoctorProfilePage() {
             </div>
             <br />
             <div>
-              <input className="bg-[#ede3ef] shadow-sm " type="datetime-local" min={today+currentTime} />
-              <button className="bg-[#ede3ef] shadow-sm  text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]" onClick={() => {setNumcita(numcita + 1);}}>Agregar cita: {numcita}</button>
-              <button className="bg-[#ede3ef] shadow-sm  text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 ml-0 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]" onClick={() => {setNumcita(0);}}>Borrar citas</button>
+              <input className="bg-[#ede3ef] shadow-sm " type="datetime-local" min={minDate} onChange={e=>setCita(e.target.value)} />
+              <button className="bg-[#ede3ef] shadow-sm  text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]">Agregar cita: {cita+' Plan: $'+planescogido} </button>
+              
             </div>
             <div>
             <button className="bg-[#ede3ef] shadow-sm text-xl text-[#a063a8] border-[#a063a8] border-2 rounded-md pl-2 pr-2 ml-0 m-2 hover:bg-[#a063a8] hover:text-[#ede3ef]">Agendar</button>

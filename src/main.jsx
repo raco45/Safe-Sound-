@@ -36,6 +36,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <UserContextProvider>
 
   <ChatContextProvider>
+    
   <React.StrictMode>
     <BrowserRouter>
       <Routes>

@@ -11,7 +11,7 @@ export const ChatContext = createContext()
 export function ChatContextProvider({children}){
     const {user}=useUser();
     const [currentUser, setcurrentUser]= useState(null);
-   const INITIAL_STATE ={
+    const INITIAL_STATE ={
     chatId:"null",
     userCon:{},
    }
