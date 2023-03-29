@@ -41,7 +41,8 @@ export function DoctorProfilePage() {
     const combinedId= user.id>singleDoctor.id
      ?  user.id + singleDoctor.id 
      :singleDoctor.id +user.id; 
-    
+  
+
     try{
         
         const res = await getDoc(doc(db, "chats", combinedId));
@@ -78,6 +79,13 @@ export function DoctorProfilePage() {
     
 };
 
+const data1 ={
+  citaDate: {cita},
+  citaPlan: {planescogido},
+  terapistaid: singleDoctor && singleDoctor.id,
+  terapistaname: singleDoctor && singleDoctor.name,
+  terapistlastname: singleDoctor && singleDoctor.lastname,
+}
 
 const data1 = {
   citaPlan: planescogido,

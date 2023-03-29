@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useUser } from "../../Contexts/UserContext";
 import { Link, useLocation } from "react-router-dom";
 
+
 export function PaymentPage() {
   const location = useLocation();
   const myData = location.state;
