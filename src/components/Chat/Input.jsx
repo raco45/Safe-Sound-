@@ -12,9 +12,28 @@ export default function Input() {
   const {user}=useUser();
   const {data}=useChat();
 
+  let date = new Date()
+  date.setDate(date.getDate() );
+  const year = date.toLocaleString('default', { year: 'numeric' })
+  const month = date.toLocaleString('default', { month: '2-digit' })
+  const day = date.toLocaleString('default', { day: '2-digit' })
+  const tomorrow = year + '-' + month + '-' + day;
+
+  // Number(data.userCon.fechaCita[1].split(":")[0]) === date.getHours() &&  
+  // data.userCon.fechaCita[0]===tomorrow && 
+  // Number(data.userCon.fechaCita[1].split(":")[0])<(date.getHours()+1)
+
+  // console.log(data.userCon.fechaCita[0]);
+
+  // console.log(data);
   const handleSend= async ()=>{
-    await updateDoc(doc(db,"chats",data.chatId),{
-      messages: arrayUnion({
+    if(text.trim()!= "" && 
+    Number(data.userCon.fechaCita[1].split(":")[0]) === date.getHours() &&  
+    data.userCon.fechaCita[0]===tomorrow && 
+    Number(data.userCon.fechaCita[1].split(":")[0])<(date.getHours()+1) ){
+
+      await updateDoc(doc(db,"chats",data.chatId),{
+        messages: arrayUnion({
         id:uuid(),
         senderId: user.id,
         date: Timestamp.now(),
@@ -34,13 +53,17 @@ export default function Input() {
       },
       [data.chatId+".date"]:serverTimestamp()
     });
-
+    
     setText("");
+  }else{
+    setText("");
+  }
   };
 
   const handleKey= e=>{
     e.code === "Enter" && handleSend();
 };
+
   return (
     <div className={styles.input}>
       
